@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreign('order_id')
                 ->references('id')->on('order-books')
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('');
 
             $table->foreign('book_id')
                 ->references('id')->on('books')
