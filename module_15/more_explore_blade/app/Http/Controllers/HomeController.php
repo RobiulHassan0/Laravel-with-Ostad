@@ -13,6 +13,16 @@ class HomeController extends Controller
         $sum = $num1 + $num2;
 
         $data = ['result' => $sum];
-        return view("Home", $data);
+        return view("Condition", $data);
+    }
+
+    public function looping(){
+        $data = [
+            ['name' => 'Jhone', 'city' => 'London'],
+            ['name' => 'jack', 'city' => 'Paris'],
+            ['name' => 'Robin', 'city' => 'Dhaka'],
+            ['name' => 'Angel', 'city' => 'Kabul'],
+        ];
+        return view("Loop", ['users' => $data]);
     }
 }
