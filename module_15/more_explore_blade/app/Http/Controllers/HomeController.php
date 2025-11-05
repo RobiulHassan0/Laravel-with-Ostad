@@ -25,4 +25,12 @@ class HomeController extends Controller
         ];
         return view("Loop", ['users' => $data]);
     }
+
+    public function assetAccess(){
+        return view('Assets');
+    }
+
+    public function showPage(){
+        return view('Home');
+    }
 }
