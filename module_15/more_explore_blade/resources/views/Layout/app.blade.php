@@ -9,7 +9,7 @@
 </head>
 <body>
     @include('Layout.header')
-
+        @yield('content')
 
     @include('Layout.footer')
 

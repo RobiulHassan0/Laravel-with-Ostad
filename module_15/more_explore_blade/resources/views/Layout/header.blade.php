@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light py-4 shadow-sm">
+<nav class="navbar navbar-expand-lg sticky-top bg-white navbar-light py-4 shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img class="img-fluid" src="bootstrap5-plain-assets/logos/plainb-logo.svg" alt="" width="96px">
+            <img class="img-fluid" src="{{ asset('bootstrap5-plain-assets/logos/plainb-logo.svg') }}" alt="" width="96px">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav06" aria-controls="nav06" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

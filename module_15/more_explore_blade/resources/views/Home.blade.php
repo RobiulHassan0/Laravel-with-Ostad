@@ -1,8 +1,9 @@
-{{-- Show a webpage inlcuding its components
 
-@include('components.Header')
-@include('components.Hero')
-@include('components.Team')
-@include('components.Footer') --}}
+@extends('Layout.app')
 
-
+@section('content')
+    @include('Components.hero')
+    @include('Components.howWeDo')
+    @include('Components.pricing')
+    @include('Components.newslatter')
+@endsection
