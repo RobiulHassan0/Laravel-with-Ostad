@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -46,18 +47,39 @@ class TasksController extends Controller
 
     public function update(Request $request, $id){
         $title = $request->title;
-        $decscription = $request->desc;
+        $description = $request->desc;
+
+        $taskOld = DB::table('tasks')->where('id', $id)->first();
+        $imageOldPath = $taskOld->image;
+
+        // Delete old image if new image is uploaded
+        if($request->hasFile('image')){
+            // Optionally, delete the old image from storage
+            Storage::disk('public')->delete($imageOldPath);
+
+            // store new image
+            $imagePath = $request->file('image')->store('tasks/test', 'public');
+        }
 
         DB::table('tasks')->where('id', $id)->update([
             'title' => $title,
-            'description' => $decscription,
+            'description' => $description,
+            'image'=> $imagePath,
             'updated_at' => now(),
         ]);
 
-        return redirect()->route('tasks.index')->with('success', 'Task Updated Seuccessfully');
+        return redirect()->route('tasks.index')->with('success', 'Task Updated Successfully');
     }
-    // public function test(){
-    //     $tasks = DB::table('tasks')->get();
-    //     return $tasks;
-    // }
+    
+    public function destroy($id){
+        $taskOld = DB::table('tasks')->where('id', $id)->first();
+        $imagePath = $taskOld->image;
+
+        if($imagePath && Storage::disk('public')->exists($imagePath)){
+            Storage::disk('public')->delete($imagePath);
+        }
+
+        DB::table('tasks')->where('id', $id)->delete();
+        return redirect()->route('tasks.index')->with('success','Task Deleted Successfully');
+    }
 }
