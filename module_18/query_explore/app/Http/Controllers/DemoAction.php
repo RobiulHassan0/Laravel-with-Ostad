@@ -92,7 +92,7 @@ class DemoAction extends Controller
 
     function insertDemoData(Request $result){
 
-        $result = DB::table('brands')
+        // $result = DB::table('brands')
     }
 
 }
