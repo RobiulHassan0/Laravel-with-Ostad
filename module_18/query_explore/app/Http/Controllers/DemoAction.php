@@ -52,11 +52,47 @@ class DemoAction extends Controller
                     ->where('categories.categoryName', '=', 'Food');
             })->get();
         
+        
         // Unions Query
-
         $Query1 = DB::table('products')->where('products.price', '>', 2000);
-        $Otherquery = DB::table('products')->where('products.price', '>', 2000);
+        $Otherquery = DB::table('products')->where('products.discount', '>', 1);
+            $result = $Query1->union($Otherquery)->get();
 
+        
+        // Basic Where
+        $result = DB::table('products')
+            ->where('products.price', 'NOT LIKE', '%Ca%')
+            ->get();
+
+        $result = DB::table('products')
+            ->whereIn('products.price', [20, 5000])
+            ->get();  
+            
+        $result = DB::table('products')
+            ->whereNotIn('products.price', [20, 5000])
+            ->get(); 
+        
+        // Order By
+        $result = DB::table('brands')->orderBy('brandName', 'desc')->get();
+        $result = DB::table('brands')->oldest()->first();
+        $result = DB::table('brands')->latest()->first();
+        $result = DB::table('products')->skip(2)->take(3)->get();
+
+        // Group By
+        $result = DB::table('products')->groupBy('price')->having('price', '>', 2000)->get();
+        
+        // Data Insert
+        $result = DB::table('brands')
+            ->insert([
+                'brandName' => 'Dell',
+                'brandImg' => 'Photo Dell'
+            ]);
+        return $result;
+    }
+
+    function insertDemoData(Request $result){
+        
+        // $result = DB::table('brands')
     }
 
 }

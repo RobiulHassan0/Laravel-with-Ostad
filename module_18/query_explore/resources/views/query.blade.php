@@ -128,19 +128,17 @@
         <table>
             <thead>
                 <tr>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Product Price</th>
-                    <th>Category</th>
+                    <th>NO.</th>
+                    <th>Product Name (Group Title)</th>
+                    <th>Total Products</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($result as $product)
                     <tr>
-                        <td>{{ $product->id }}</td> <!-- Dynamic Serial Number -->
-                        <td>{{ $product->title }}</td>
-                        <td>{{ $product->price }}</td>
-                        <td>{{ $product->categoryName }}</td>
+                        <td>{{ $loop->iteration }}</td> <!-- Dynamic Serial Number -->
+                        <td>{{ $product->short_des }}</td>
+                        <td>{{ $product->total }}</td>
                     </tr>
                 @endforeach
             </tbody>
