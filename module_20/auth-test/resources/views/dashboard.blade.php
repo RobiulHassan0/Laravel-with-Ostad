@@ -14,7 +14,7 @@
 
     <p>Your Name: {{$userInfo->name}}</p>
     <p>Your Name: {{$userInfo->email}}</p>
-    <p>Your Name: {{$userInfo->pasword}}</p>
+    <p>Your Name: {{$userInfo->password}}</p>
 
     <button><a href="{{route('custom.logout')}}">Log Out</a></button>
 </body>
