@@ -47,8 +47,8 @@
                 <div class="flex items-center gap-3 mb-8 pb-6 border-b border-gray-700">
                     <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">A</div>
                     <div>
-                        <p class="text-white font-medium">Admin User</p>
-                        <p class="text-gray-400 text-sm">admin@blog.com</p>
+                        <p class="text-white font-medium">{{ Auth::user()->name }}</p>
+                        <p class="text-gray-400 text-sm">{{ Auth::user()->email }}</p>
                     </div>
                 </div>
 
@@ -59,13 +59,13 @@
                         </svg>
                         Dashboard
                     </a>
-                    <a href="{{ route('admin.categories.index') }}" class="flex items-center gap-3 px-4 py-3 bg-primary rounded-lg text-white">
+                    <a href="{{ route('categories.index') }}" class="flex items-center gap-3 px-4 py-3 bg-primary rounded-lg text-white">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                         </svg>
                         Categories
                     </a>
-                    <a href="{{ route('admin.posts.allpost') }}" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg transition">
+                    <a href="{{ route('posts.allpost') }}" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                         </svg>
@@ -91,7 +91,7 @@
                         <h1 class="text-2xl font-bold text-dark">Categories</h1>
                         <p class="text-gray-600">Manage blog categories</p>
                     </div>
-                    <a href="{{ route('admin.categories.create') }}" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition">
+                    <a href="{{ route('categories.create') }}" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                         </svg>
@@ -185,12 +185,12 @@
 
                                     <td class="px-6 py-4">
                                         <div class="flex items-center gap-2">
-                                            <a href="{{ route('admin.categories.edit', $category->id) }}" class="p-2 text-primary hover:bg-primary/10 rounded-lg" title="Edit">
+                                            <a href="{{ route('categories.edit', $category->id) }}" class="p-2 text-primary hover:bg-primary/10 rounded-lg" title="Edit">
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                                 </svg>
                                             </a>
-                                            <form action="{{ route('admin.categories.delete', $category->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                                            <form action="{{ route('categories.delete', $category->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                                                 @csrf @method('DELETE')
                                                 <button class="p-2 text-red-500 hover:bg-red-50 rounded-lg" title="Delete">
                                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

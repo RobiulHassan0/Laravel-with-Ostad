@@ -29,6 +29,17 @@
     </style>
 </head>
 <body class="bg-light min-h-screen">
+    <!-- @if(session('success'))
+        <div class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50">
+            {{ session('error') }}
+        </div>
+    @endif -->
     <div class="flex">
         <!-- Sidebar -->
         <aside class="w-64 bg-dark min-h-screen fixed left-0 top-0">
@@ -55,13 +66,13 @@
                         </svg>
                         Dashboard
                     </a>
-                    <a href="{{ route('admin.categories.index') }}" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg transition">
+                    <a href="{{ route('categories.index') }}" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
                         </svg>
                         Categories
                     </a>
-                    <a href="{{ route('admin.posts.allpost') }}" class="flex items-center gap-3 px-4 py-3 bg-primary rounded-lg text-white">
+                    <a href="{{ route('posts.allpost') }}" class="flex items-center gap-3 px-4 py-3 bg-primary rounded-lg text-white">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
                         </svg>
@@ -83,7 +94,7 @@
         <main class="flex-1 ml-64">
             <header class="bg-white shadow-sm px-8 py-4">
                 <div class="flex items-center gap-4">
-                    <a href="{{ route('admin.posts.allpost') }}" class="p-2 hover:bg-gray-100 rounded-lg transition">
+                    <a href="{{ route('posts.allpost') }}" class="p-2 hover:bg-gray-100 rounded-lg transition">
                         <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                         </svg>
@@ -96,7 +107,7 @@
             </header>
 
             <div class="p-8">
-                <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="grid lg:grid-cols-3 gap-8">
                         
@@ -109,8 +120,10 @@
                                 </label>
                                 <input type="text" id="title" name="title" required
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition text-lg"
-                                    placeholder="Enter your post title...">
-                                <p class="mt-1 text-sm text-red-600 hidden">The title field is required (max 150 characters).</p>
+                                    placeholder="Enter your post title... (max 100 characters)">
+                                @error('title')
+                                    <p class="mt-1 text-sm text-red-600 hidden">{{$message}}</p>
+                                @enderror
                             </div>
                            
                             <!-- Short Description -->
@@ -118,17 +131,13 @@
                                 <label for="short_description" class="block text-sm font-medium text-gray-700 mb-2">
                                     Short Description <span class="text-red-500">*</span>
                                 </label>
-                                <textarea id="short_description"
-                                    name="short_desc"
-                                    rows="3"
-                                    required
+                                <textarea id="short_description" name="short_desc" rows="3" required
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition resize-none"
-                                    placeholder="Write a short summary of the post (max 150 characters)...">
-                                </textarea>
+                                    placeholder="Enter a short description for this post (max 150 characters)"></textarea>
 
-                                <p class="mt-1 text-sm text-gray-500">
-                                    This short description will be shown in post listings and previews.
-                                </p>
+                                @error('title')
+                                    <p class="mt-1 text-sm text-red-600 hidden">{{$message}}</p>
+                                @enderror
                             </div>
 
                             <!-- Content -->
@@ -139,8 +148,9 @@
                                 <textarea id="content" name="content" rows="15" required
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition resize-none"
                                     placeholder="Write your blog content here... (minimum 50 characters)"></textarea>
-                                <p class="mt-1 text-sm text-red-600 hidden">The content field is required (minimum 50 characters).</p>
-                                <p class="mt-2 text-sm text-gray-500">You can use HTML tags for formatting.</p>
+                                @error('title')
+                                    <p class="mt-1 text-sm text-red-600 hidden">{{$message}}</p>
+                                @enderror
                             </div>
 
                             <!-- Featured Image -->
@@ -188,7 +198,7 @@
                                         class="w-full bg-primary text-white px-4 py-3 rounded-lg font-semibold hover:bg-primary-dark transition">
                                         Create Post
                                     </button>
-                                    <a href="{{ route('admin.posts.allpost') }}"
+                                    <a href="{{ route('posts.allpost') }}"
                                         class="w-full text-center px-4 py-3 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
                                         Cancel
                                     </a>
@@ -209,7 +219,7 @@
                                     @endforeach
                                 </select>
                                 <p class="mt-1 text-sm text-red-600 hidden">Please select a category.</p>
-                                <a href="{{ route('admin.categories.create') }}" class="inline-block mt-3 text-sm text-primary hover:underline">
+                                <a href="{{ route('categories.create') }}" class="inline-block mt-3 text-sm text-primary hover:underline">
                                     + Add New Category
                                 </a>
                             </div>

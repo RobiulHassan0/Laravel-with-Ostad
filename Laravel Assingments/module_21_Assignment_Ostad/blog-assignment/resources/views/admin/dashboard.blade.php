@@ -64,13 +64,13 @@
                         </svg>
                         Dashboard
                     </a>
-                    <a href="{{route('admin.categories.index')}}" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg transition">
+                    <a href="{{route('categories.index')}}" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                         </svg>
                         Categories
                     </a>
-                    <a href="{{ route('admin.posts.allpost') }}" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg transition">
+                    <a href="{{ route('posts.allpost') }}" class="flex items-center gap-3 px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-lg transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                         </svg>
@@ -174,7 +174,7 @@
                     <div class="bg-white rounded-xl shadow-sm p-6">
                         <h2 class="text-lg font-bold text-dark mb-4">Quick Actions</h2>
                         <div class="grid grid-cols-2 gap-4">
-                            <a href="{{route('admin.posts.create')}}" class="flex flex-col items-center gap-2 p-4 bg-primary/5 rounded-lg hover:bg-primary/10 transition">
+                            <a href="{{route('posts.create')}}" class="flex flex-col items-center gap-2 p-4 bg-primary/5 rounded-lg hover:bg-primary/10 transition">
                                 <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -182,7 +182,7 @@
                                 </div>
                                 <span class="text-sm font-medium text-dark">New Post</span>
                             </a>
-                            <a href="{{route('admin.categories.create')}}" class="flex flex-col items-center gap-2 p-4 bg-green-50 rounded-lg hover:bg-green-100 transition">
+                            <a href="{{route('categories.create')}}" class="flex flex-col items-center gap-2 p-4 bg-green-50 rounded-lg hover:bg-green-100 transition">
                                 <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -190,7 +190,7 @@
                                 </div>
                                 <span class="text-sm font-medium text-dark">New Category</span>
                             </a>
-                            <a href="{{route('admin.posts.allpost')}}" class="flex flex-col items-center gap-2 p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition">
+                            <a href="{{route('posts.allpost')}}" class="flex flex-col items-center gap-2 p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition">
                                 <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
@@ -198,7 +198,7 @@
                                 </div>
                                 <span class="text-sm font-medium text-dark">Manage Posts</span>
                             </a>
-                            <a href="{{route('admin.categories.index')}}" class="flex flex-col items-center gap-2 p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition">
+                            <a href="{{route('categories.index')}}" class="flex flex-col items-center gap-2 p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition">
                                 <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />

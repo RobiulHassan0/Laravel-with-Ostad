@@ -33,16 +33,21 @@ class PostController extends Controller
             $data['image'] = $path;
         }
 
-        $data['user_id'] = auth()->id() ?? 1;
+        $wordCount = str_word_count(strip_tags($data['content']));
+        $readTime = ceil($wordCount / 200);
+        $data['read_time'] = $readTime . ' min read';
+
+        $data['user_id'] = auth()->id();
         
         if($data['status'] === 'published'){
             $data['published_at'] = now();
         }
 
-        $data['read_time'] = ceil(str_word_count(strip_tags($data['content'])) / 200) . ' min';
-
-        Post::create($data);
-        return redirect()->route('admin.posts.allpost')->with('success', 'Post created successfully.');
+        $post = Post::create($data);
+        if(!$post){
+            return redirect()->route('posts.allpost')->with('success', 'Post created successfully.');
+        }
+        return redirect()->route('posts.allpost')->with('error', 'Failed to create post. Please try again.');
     }
 
     public function edit($id){

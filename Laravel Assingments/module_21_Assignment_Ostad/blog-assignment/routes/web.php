@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use Termwind\Components\Raw;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -13,16 +14,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BlogController::class, 'home'])->name('home');
 
-Route::get('/registration', [AuthController::class, 'registration'])->name('auth.registration');
-Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::middleware('guest')->group( function () {
+    Route::get('/registration', [AuthController::class, 'registration'])->name('auth.registration');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 
-Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
-Route::post('/login', [AuthController::class, 'authenticate'])->name('login.submit');
+    Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('login.submit');
+});
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-Route::prefix('admin')->name('admin.')->group( function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::prefix('admin')->middleware('auth')->group( function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     // Post Routes
     Route::get('/posts', [PostController::class, 'postIndex'])->name('posts.allpost');
@@ -40,9 +41,7 @@ Route::prefix('admin')->name('admin.')->group( function () {
     Route::put('categories/updateCategory/{id}', [CategoryController::class, 'updateCategory'])->name('categories.update');
     Route::delete('categories/deleteCategory/{id}', [CategoryController::class, 'deleteCategory'])->name('categories.delete');
 
-    // Route::get('/logout', function(){
-    //     // Logout Logic Here
-    // })->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
 
