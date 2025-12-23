@@ -6,12 +6,28 @@ use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function postIndex() {
-        $allPosts = Post::with(['category', 'user'])->latest()->get();
+    public function postIndex(Request $request){
+        $query = Post::with(['category', 'user'])->latest();
         $categories = Category::all();
+
+        if($request->filled('search')){
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        if($request->filled('category')){
+            $query->where('category_id', $request->category);
+        }
+
+        if($request->filled('status')){
+            $query->where('status', $request->status);
+        }
+
+        $allPosts = $query->paginate(5)->withQueryString();
+
         return view('admin.posts.allpost', compact('allPosts', 'categories'));
     }
 
@@ -76,7 +92,16 @@ class PostController extends Controller
         }
 
         $post->update($data);
-        return redirect()->route('admin.posts.allpost')->with('success', 'Post updated successfully.');
+        return redirect()->route('posts.allpost')->with('success', 'Post updated successfully.');
+    }
+
+    public function removeImage($id){
+        $post = Post::findOrFail($id);
+        if($post->image){
+            Storage::disk('public')->delete($post->image);
+        }
+        $post->update(['image' => null]);
+        return back()->with('success', 'Image removed successfully.');
     }
 
     public function delete($id){
@@ -86,6 +111,6 @@ class PostController extends Controller
         }
 
         $post->delete();
-        return redirect()->back()->with('success', 'Post deleted successfully.');
+        return redirect()->route('posts.allpost')->with('success', 'Post deleted successfully.');
     }
 }

@@ -13,6 +13,7 @@ use Termwind\Components\Raw;
 // });
 
 Route::get('/', [BlogController::class, 'home'])->name('home');
+Route::get('/blog-details', [BlogController::class, 'showBlog'])->name('blog.details');
 
 Route::middleware('guest')->group( function () {
     Route::get('/registration', [AuthController::class, 'registration'])->name('auth.registration');
@@ -27,11 +28,14 @@ Route::prefix('admin')->middleware('auth')->group( function () {
 
     // Post Routes
     Route::get('/posts', [PostController::class, 'postIndex'])->name('posts.allpost');
-    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-    Route::post('/posts/store', [PostController::class, 'store'])->name('posts.store');
-    Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->name('posts.edit');
-    Route::put('/posts/update/{id}', [PostController::class, 'update'])->name('posts.update');
+    Route::get('/post/create', [PostController::class, 'create'])->name('posts.create');
+    Route::post('/post/store', [PostController::class, 'store'])->name('posts.store');
+    Route::get('/post/edit/{id}', [PostController::class, 'edit'])->name('posts.edit');
+    Route::put('/post/update/{id}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('/posts/delete/{id}', [PostController::class, 'delete'])->name('posts.delete');
+
+    Route::delete('/post/{id}/removeImage', [PostController::class, 'removeImage'])->name('posts.removeImage');
+
 
     // Category Routes
     Route::get('categories', [CategoryController::class, 'showCategories'])->name('categories.index');

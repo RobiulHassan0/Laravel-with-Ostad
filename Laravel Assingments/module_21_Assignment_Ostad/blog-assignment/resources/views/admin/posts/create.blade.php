@@ -135,7 +135,7 @@
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition resize-none"
                                     placeholder="Enter a short description for this post (max 150 characters)"></textarea>
 
-                                @error('title')
+                                @error('short_desc')
                                     <p class="mt-1 text-sm text-red-600 hidden">{{$message}}</p>
                                 @enderror
                             </div>

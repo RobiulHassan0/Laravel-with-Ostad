@@ -254,7 +254,7 @@
                 <div class="bg-white rounded-xl shadow-sm">
                     <div class="p-6 border-b border-gray-100 flex items-center justify-between">
                         <h2 class="text-lg font-bold text-dark">Recent Posts</h2>
-                        <a href="posts.html" class="text-primary text-sm hover:underline">View All</a>
+                        <a href="{{ route('posts.allpost') }}" class="text-primary text-sm hover:underline">View All</a>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full">
@@ -269,18 +269,38 @@
                             </thead>
                             <tbody class="divide-y divide-gray-100">
                                 @foreach($recentPosts as $post)
-
-                                <tr class="hover:bg-gray-50">
+                                    @php
+                                        $colors = [
+                                            'bg-blue-100 text-blue-600',
+                                            'bg-green-100 text-green-600',
+                                            'bg-purple-100 text-purple-600',
+                                            'bg-orange-100 text-orange-600',
+                                            'bg-pink-100 text-pink-600',
+                                            'bg-indigo-100 text-indigo-600',
+                                            'bg-teal-100 text-teal-600',
+                                            'bg-rose-100 text-rose-600',
+                                            'bg-amber-100 text-amber-600',
+                                            'bg-cyan-100 text-cyan-600',
+                                        ];
+                                        $categoryColor = $colors[$post->category->id % count($colors)];
+                                    @endphp
+                                <tr class="hover:bg-gray-50 border-b border-gray-100">
                                     <td class="px-6 py-4">
                                         <p class="font-medium text-dark">{{$post->title}}</p>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded">{{$post->category->name}}</span>
+                                        <span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded {{$categoryColor}}">{{ucfirst($post->category->name)}}</span>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded">{{$post->status}}</span>
+                                        <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded
+                                    {{  $post->status == 'published' 
+                                        ? 'bg-green-100 text-green-600' 
+                                        : 'bg-orange-100 text-orange-600' 
+                                    }}">
+                                    {{ucfirst($post->status)}}
+                                    </span>
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-600">{{$post->published_at->format('M d, Y')}}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">{{$post->published_at ? $post->published_at->format('M d, Y') : 'Not published'}}</td>
                                     <td class="px-6 py-4">
                                         <div class="flex items-center gap-2">
                                             <a href="{{route('posts.edit', $post->id)}}" class="text-primary hover:underline text-sm">Edit</a>
