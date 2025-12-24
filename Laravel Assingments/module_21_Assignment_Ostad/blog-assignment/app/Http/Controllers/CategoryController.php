@@ -34,20 +34,25 @@ class CategoryController extends Controller
 
         Category::create($data);
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
     public function editCategory($id){
         $category = Category::findOrFail($id);
-        return view('admin.categories.category-edit', compact('category'));
+        return view('admin.categories.edit', compact('category'));
     }
 
     public function updateCategory(CategoryRequest $request, $id){
         $category = Category::findOrFail($id);
+        
         $data = $request->validated();   
-
+        
+        if($category->name !== $data['name']){
+            $data['slug'] = Str::slug($data['name']);
+        }
+        
         if($request->hasFile('image')){
-            if($category->image){
+            if($category->image && Storage::disk('public')->exists($category->image)){
                 Storage::disk('public')->delete($category->image);
             }
 
@@ -58,8 +63,16 @@ class CategoryController extends Controller
         }
 
         $category->update($data);
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
+    }
 
-        return redirect()->back()->with('success', 'Category updated successfully.');
+    public function categoryImageRemove($id){
+        $category = Category::findOrFail($id);
+        if($category->image){
+            Storage::disk('public')->delete($category->image);
+        }
+        $category->update(['image' => null]);
+        return back()->with('success', 'Category Image removed successfully.');
     }
 
     public function deleteCategory($id){
@@ -68,6 +81,6 @@ class CategoryController extends Controller
             Storage::disk('public')->delete($category->image);
         }
         $category->delete();
-        return redirect()->back()->with('success', 'Category deleted successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 }

@@ -35,6 +35,7 @@ Route::prefix('admin')->middleware('auth')->group( function () {
     Route::delete('/posts/delete/{id}', [PostController::class, 'delete'])->name('posts.delete');
 
     Route::delete('/post/{id}/removeImage', [PostController::class, 'removeImage'])->name('posts.removeImage');
+    Route::delete('/category/{id}/removeImage', [CategoryController::class, 'categoryImageRemove'])->name('categories.removeImage');
 
 
     // Category Routes

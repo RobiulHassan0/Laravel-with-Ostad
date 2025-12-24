@@ -115,8 +115,6 @@
                     @csrf
                     @method('PUT')
                 </form>
-                <!-- <input type="hidden" name="_method" value="PUT"> -->
-
                 <div class="grid lg:grid-cols-3 gap-8">
                     <!-- Main Content -->
                     <div class="lg:col-span-2 space-y-6">
@@ -128,9 +126,9 @@
                             <input type="text" id="title" name="title" required form="postUpdateForm"
                                 value="{{ old('title', $post->title) }}"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition text-lg">
-                            @error('title')
-                            <p class="mt-1 text-sm text-red-600 hidden">{{$message}}</p>
-                            @enderror
+                            @if ($errors->has('title'))
+                                <p class="mt-1 text-sm text-red-600 hidden">{{$message}}</p>
+                            @endif
                         </div>
 
                         <!-- Short Description -->
@@ -216,25 +214,26 @@
                                 </select>
                             </div>
 
-                            <!-- Published Date Info
-                                <div class="mb-4 p-3 bg-green-50 rounded-lg">
+                            <!-- Published Date Info -->
+                                <div class="mb-4 p-3 space-y-2 bg-green-50 rounded-lg">
                                     <p class="text-sm text-green-700">
-                                        @php
-                                            if ($post->status == 'published') {
-                                                echo 'This post is scheduled to be published on ';
-
-                                            } elseif ($post->published_at) {
-                                                echo 'This post was published on ';
-                                            } else {
-                                                echo 'This post is not published yet. ';
-                                            }
-                                        @endphp
-                                        <span class="font-medium">{{ $post->published_at ? $post->published_at->format('M d, Y \a\t g:i A') : 'Not published yet' }}</span>
-                                            }
-                                        @endphp
-                                        
+                                        @if($post->status === 'published' && $post->published_at)
+                                            <span class="font-bold">Published :</span>
+                                            {{ $post->published_at->format('M d, Y \a\t g:i A') }}
+                                        @else
+                                            <span class="font-bold">Post Created :</span>
+                                            {{ $post->created_at->format('M d, Y \a\t g:i A') }}
+                                        @endif
                                     </p>
-                                </div> -->
+                                    <p class="text-xs text-green-600 italic">
+                                        <span class="font-bold">Last Update :</span>
+                                        @if($post->updated_at->ne($post->created_at) )
+                                            {{ $post->updated_at->format('M d, Y \a\t g:i A') }}
+                                        @else
+                                            Not updated yet
+                                        @endif
+                                    </p>
+                                </div>
 
                             <!-- Action Buttons -->
                             <div class="flex flex-col gap-3">
