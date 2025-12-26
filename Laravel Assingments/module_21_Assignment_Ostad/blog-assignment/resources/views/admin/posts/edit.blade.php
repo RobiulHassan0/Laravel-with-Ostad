@@ -37,7 +37,7 @@
         <!-- Sidebar -->
         <aside class="w-64 bg-dark min-h-screen fixed left-0 top-0">
             <div class="p-6">
-                <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-2 text-white mb-8">
+                <a href="{{ route('home') }}" class="flex items-center space-x-2 text-white mb-8">
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
                     </svg>
@@ -166,13 +166,7 @@
                             <div class="mb-4">
                                 <img src="{{ asset('storage/' . $post->image) }}" alt="Current featured image" class="w-full h-48 object-cover rounded-lg">
                             </div>
-                            <!-- <form action="{{ route('posts.removeImage', $post->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <div class="flex items-center gap-4">
-                                    <button onclick="return confirm('Are you sure to delete this image ?')" type="submit" class="text-red-500 text-sm hover:underline">Remove Image</button>
-                                </div>
-                            </form> -->
+
                         </div>
 
                         <!-- Upload New Image -->

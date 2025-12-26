@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name', 25)->unique();
             $table->string('description', 100)->nullable();
             $table->string('slug')->unique();
+            $table->unsignedTinyInteger('color_index')->default(0);
             $table->string('image')->nullable();
             $table->timestamps();
         });

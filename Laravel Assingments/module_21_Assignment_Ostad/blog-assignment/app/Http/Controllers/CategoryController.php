@@ -23,7 +23,12 @@ class CategoryController extends Controller
     public function storeCategory(CategoryRequest $request){
         $data = $request->validated();   
         $data['slug'] = Str::slug($data['name']);
+
+        $colorCount = count(config('category_colors'));
+        $lastCategory = Category::latest('id')->first();
+        $data['color_index'] = $lastCategory ? ($lastCategory->color_index + 1) % $colorCount : 0;
         
+
         if($request->hasFile('image')){
             $image = $request->file('image');
             $imageName = time() .'_'. uniqid() .'.'. $image->getClientOriginalExtension();

@@ -44,7 +44,7 @@
         <!-- Sidebar -->
         <aside class="w-64 bg-dark min-h-screen fixed left-0 top-0">
             <div class="p-6">
-                <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-2 text-white mb-8">
+                <a href="{{ route('home') }}" class="flex items-center space-x-2 text-white mb-8">
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                     </svg>

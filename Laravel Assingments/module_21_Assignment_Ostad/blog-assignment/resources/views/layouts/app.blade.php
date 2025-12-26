@@ -34,16 +34,23 @@
 </head>
 <body class="bg-light min-h-screen">
 
+<!-- Navbar -->
+
     <header>
         @include('partials.navbar')
     </header>
+
+<!-- Page Content -->
 
     <main >
         @yield('content')
     </main>
 
+<!-- Footer -->
+
     <footer class="bg-dark text-white py-12">
         @include('partials.footer')
     </footer>
+
 </body>
 </html>

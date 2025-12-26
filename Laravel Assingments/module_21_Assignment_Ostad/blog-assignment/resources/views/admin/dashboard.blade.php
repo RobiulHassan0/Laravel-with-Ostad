@@ -48,7 +48,7 @@
                 <!-- Admin Info -->
                 <div class="flex items-center gap-3 mb-8 pb-6 border-b border-gray-700">
                     <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">
-                        A
+                        H
                     </div>
                     <div>
                         <p class="text-white font-medium">{{ Auth::user()->name ?? 'Guest Admin' }}</p>
@@ -269,27 +269,12 @@
                             </thead>
                             <tbody class="divide-y divide-gray-100">
                                 @foreach($recentPosts as $post)
-                                    @php
-                                        $colors = [
-                                            'bg-blue-100 text-blue-600',
-                                            'bg-green-100 text-green-600',
-                                            'bg-purple-100 text-purple-600',
-                                            'bg-orange-100 text-orange-600',
-                                            'bg-pink-100 text-pink-600',
-                                            'bg-indigo-100 text-indigo-600',
-                                            'bg-teal-100 text-teal-600',
-                                            'bg-rose-100 text-rose-600',
-                                            'bg-amber-100 text-amber-600',
-                                            'bg-cyan-100 text-cyan-600',
-                                        ];
-                                        $categoryColor = $colors[$post->category->id % count($colors)];
-                                    @endphp
                                 <tr class="hover:bg-gray-50 border-b border-gray-100">
                                     <td class="px-6 py-4">
                                         <p class="font-medium text-dark">{{$post->title}}</p>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded {{$categoryColor}}">{{ucfirst($post->category->name)}}</span>
+                                        <span class="{{ $post->category->color['badge'] }} text-xs px-2 py-1 rounded">{{ucfirst($post->category->name)}}</span>
                                     </td>
                                     <td class="px-6 py-4">
                                         <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded

@@ -47,8 +47,11 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="{{ route('home') }}" class="text-gray-600 hover:text-primary transition">Home</a>
                     <a href="{{ route('category-index') }}" class="text-primary font-medium">Categories</a>
+                    @if (Auth::check())
+                    <a href="{{ route('admin.dashboard') }}" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition">Dashboard</a>
+                    @else
                     <a href="{{ route('auth.login') }}" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition">Login</a>
-                </div>
+                    @endif                </div>
             </div>
         </div>
     </nav>
@@ -58,30 +61,17 @@
     <section id="categories" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                <!-- Category Card -->
+                
+            <!-- Category Card -->
                 @foreach($categories as $category)
-                @php
-                $colors = [
-                ['card' => 'bg-gradient-to-br from-blue-500 to-blue-600', 'badge' => 'bg-blue-100 text-blue-600'],
-                ['card' => 'bg-gradient-to-br from-green-500 to-green-600', 'badge' => 'bg-green-100 text-green-600'],
-                ['card' => 'bg-gradient-to-br from-purple-500 to-purple-600', 'badge' => 'bg-purple-100 text-purple-600'],
-                ['card' => 'bg-gradient-to-br from-orange-500 to-orange-600', 'badge' => 'bg-orange-100 text-orange-600'],
-                ['card' => 'bg-gradient-to-br from-pink-500 to-pink-600', 'badge' => 'bg-pink-100 text-pink-600'],
-                ['card' => 'bg-gradient-to-br from-indigo-500 to-indigo-600', 'badge' => 'bg-indigo-100 text-indigo-600'],
-                ['card' => 'bg-gradient-to-br from-teal-500 to-teal-600', 'badge' => 'bg-teal-100 text-teal-600'],
-                ['card' => 'bg-gradient-to-br from-rose-500 to-rose-600', 'badge' => 'bg-rose-100 text-rose-600'],
-                ['card' => 'bg-gradient-to-br from-amber-500 to-amber-600', 'badge' => 'bg-amber-100 text-amber-600'],
-                ['card' => 'bg-gradient-to-br from-cyan-500 to-cyan-600', 'badge' => 'bg-cyan-100 text-cyan-600'],
-                ];
-                $colorData = $colors[$loop->index % count($colors)];
-                @endphp
-                <a href="{{ route('home', $category->id) }}" class="group {{ $colorData['card'] }} p-6 rounded-xl text-white text-center hover:shadow-xl transition transform hover:-translate-y-1">
+                <a href="{{ route('category-details', $category->id) }}" class="group {{ $category->color['card'] }} p-6 rounded-xl text-white text-center hover:shadow-xl transition transform hover:-translate-y-1">
                     <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
                         <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" class="w-6 h-6 object-contain brightness-0 invert">
                     </div>
                     <h3 class="font-semibold">{{ $category->name }}</h3>
                     <p class="text-sm text-blue-100 mt-1">{{ $category->posts_count }} posts</p>
                 </a>
+                
                 @endforeach
             </div>
         </div>

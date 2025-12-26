@@ -10,7 +10,7 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $categories = Category::withCount('posts')->get();
+        $categories = Category::withCount('posts')->latest()->take(5)->get();
         $posts = Post::with('category', 'user')->where('status', 'published')->latest()->paginate(6);
         return view('frontend.blogs.index', compact('categories', 'posts'));
     }

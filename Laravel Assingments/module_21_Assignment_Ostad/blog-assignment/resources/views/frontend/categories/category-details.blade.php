@@ -61,8 +61,8 @@
     </nav>
 
     <!-- Category Header -->
-     
-    <section class="bg-gradient-to-br from-blue-500 to-blue-700 text-white py-16">
+
+    <section class="{{ $category->color['card'] }} text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav class="flex items-center space-x-2 text-sm text-blue-100 mb-6">
                 <a href="{{ route('home') }}" class="hover:text-white transition">Home</a>

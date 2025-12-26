@@ -42,7 +42,6 @@
 </head>
 <body class="bg-light min-h-screen">
     <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="{{ route('home') }}" class="flex items-center space-x-2">
@@ -66,13 +65,13 @@
 
     <!-- Breadcrumb -->
     <div class="bg-white border-b">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 ">
             <nav class="flex items-center space-x-2 text-sm text-gray-600">
                 <a href="{{ route('home') }}" class="hover:text-primary transition">Home</a>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
-                <a href="{{ route('category-details', $post->category->id) }}" class="hover:text-primary transition">{{ $post->category->name }}</a>
+                <a href="{{ route('category-details', $post->category->id) }}" class="hover:text-primary transition" >{{ $post->category->name }}</a>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
@@ -87,7 +86,7 @@
             <!-- Header -->
             <header class="mb-8">
                 <div class="flex items-center gap-3 mb-4">
-                    <a href="{{ route('category-details', $post->category->id) }}" class="bg-blue-100 text-blue-600 text-sm font-medium px-3 py-1 rounded-full hover:bg-blue-200 transition">
+                    <a href="{{ route('category-details', $post->category->id) }}" class="{{ $post->category->color['badge'] }} text-sm font-medium px-3 py-1 rounded-full hover:bg-blue-200 transition">
                         {{ $post->category->name }}
                     </a>
                     <span class="text-gray-400">•</span>
@@ -148,7 +147,7 @@
     <!-- Related post -->
     <section class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-dark mb-8">Recent post from {{ $post->category->name }}</h2>
+            <h2 class="text-2xl font-bold text-dark mb-8 ">Recent post from {{ $post->category->name }}</h2>
             <div class="grid md:grid-cols-3 gap-6">
                 <!-- Related Post 1 -->
                 <article class="bg-light rounded-xl overflow-hidden hover:shadow-lg transition group">
