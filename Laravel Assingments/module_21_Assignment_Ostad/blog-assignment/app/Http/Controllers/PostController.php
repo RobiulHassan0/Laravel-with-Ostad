@@ -77,12 +77,12 @@ class PostController extends Controller
         $data = $request->validated();
 
         if($request->hasFile('image')){
-            if($post->image){
+            if($post->image && Storage::disk('public')->exists($post->image)){
                 Storage::disk('public')->delete($post->image);
-            } 
+            }
 
             $image = $request->file('image');
-            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $imageName = time() .'_'. uniqid() . '.' . $image->getClientOriginalExtension();
             $path = $image->storeAs('posts', $imageName, 'public');
             $data['image'] = $path;
         }

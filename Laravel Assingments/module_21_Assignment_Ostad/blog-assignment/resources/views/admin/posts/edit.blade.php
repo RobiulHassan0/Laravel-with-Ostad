@@ -166,13 +166,13 @@
                             <div class="mb-4">
                                 <img src="{{ asset('storage/' . $post->image) }}" alt="Current featured image" class="w-full h-48 object-cover rounded-lg">
                             </div>
-                            <form action="{{ route('posts.removeImage', $post->id) }}" method="POST">
+                            <!-- <form action="{{ route('posts.removeImage', $post->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <div class="flex items-center gap-4">
                                     <button onclick="return confirm('Are you sure to delete this image ?')" type="submit" class="text-red-500 text-sm hover:underline">Remove Image</button>
                                 </div>
-                            </form>
+                            </form> -->
                         </div>
 
                         <!-- Upload New Image -->
@@ -215,25 +215,14 @@
                             </div>
 
                             <!-- Published Date Info -->
+                             @if($post->status === 'published' && $post->published_at)
                                 <div class="mb-4 p-3 space-y-2 bg-green-50 rounded-lg">
                                     <p class="text-sm text-green-700">
-                                        @if($post->status === 'published' && $post->published_at)
-                                            <span class="font-bold">Published :</span>
-                                            {{ $post->published_at->format('M d, Y \a\t g:i A') }}
-                                        @else
-                                            <span class="font-bold">Post Created :</span>
-                                            {{ $post->created_at->format('M d, Y \a\t g:i A') }}
-                                        @endif
-                                    </p>
-                                    <p class="text-xs text-green-600 italic">
-                                        <span class="font-bold">Last Update :</span>
-                                        @if($post->updated_at->ne($post->created_at) )
-                                            {{ $post->updated_at->format('M d, Y \a\t g:i A') }}
-                                        @else
-                                            Not updated yet
-                                        @endif
+                                        <span class="font-bold">Published :</span>
+                                        {{ $post->published_at->format('M d, Y \a\t g:i A') }}
                                     </p>
                                 </div>
+                            @endif
 
                             <!-- Action Buttons -->
                             <div class="flex flex-col gap-3">
@@ -272,22 +261,22 @@
                         <!-- Post Info -->
                         <div class="bg-white rounded-xl shadow-sm p-6">
                             <h3 class="font-semibold text-dark mb-4">Post Info</h3>
-                            <div class="space-y-3 text-sm">
+                            <div class="space-y-3">
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Author:</span>
-                                    <span class="font-medium text-dark">{{ Str::ucfirst($post->user->name) }}</span>
+                                    <span class="font-bold text-dark">{{ Str::ucfirst($post->user->name) }}</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Created:</span>
-                                    <span class="text-gray-700">{{ $post->created_at->format('M d, Y') }}</span>
+                                    <span class="text-gray-700">{{ $post->created_at->format('M d, Y \a\t g:i A') }}</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Updated:</span>
-                                    <span class="text-gray-700">{{ $post->updated_at->format('M d, Y') }}</span>
+                                    <span class="text-gray-700">{{ $post->updated_at->ne($post->created_at) ? $post->updated_at->format('M d, Y \a\t g:i A') : 'not updated yet' }}</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Slug:</span>
-                                    <span class="text-gray-700 text-xs">{{ $post->category->slug }}</span>
+                                    <span class="text-gray-700">{{ $post->category->slug }}</span>
                                 </div>
                             </div>
                         </div>

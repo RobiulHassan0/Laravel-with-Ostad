@@ -38,7 +38,7 @@
         <aside class="w-64 bg-dark min-h-screen fixed left-0 top-0">
             <div class="p-6">
                 <!-- Logo -->
-                <a href="{{route('admin.dashboard')}}" class="flex items-center space-x-2 text-white mb-8">
+                <a href="{{route('home')}}" class="flex items-center space-x-2 text-white mb-8">
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
                     </svg>
@@ -311,44 +311,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <!-- <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4">
-                                        <p class="font-medium text-dark">10 Productivity Tips for Remote Workers</p>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded">Lifestyle</span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded">Published</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-gray-600">Dec 14, 2024</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-2">
-                                            <a href="posts-edit.html" class="text-primary hover:underline text-sm">Edit</a>
-                                            <span class="text-gray-300">|</span>
-                                            <button class="text-red-500 hover:underline text-sm">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4">
-                                        <p class="font-medium text-dark">Understanding MVC Architecture</p>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span class="bg-purple-100 text-purple-600 text-xs px-2 py-1 rounded">Education</span>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span class="bg-orange-100 text-orange-600 text-xs px-2 py-1 rounded">Draft</span>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-gray-600">Dec 13, 2024</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-2">
-                                            <a href="posts-edit.html" class="text-primary hover:underline text-sm">Edit</a>
-                                            <span class="text-gray-300">|</span>
-                                            <button class="text-red-500 hover:underline text-sm">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr> -->
+                                
                             </tbody>
                             @endforeach
                         </table>

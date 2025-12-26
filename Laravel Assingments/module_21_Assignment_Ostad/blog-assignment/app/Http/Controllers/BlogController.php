@@ -2,32 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
 
 class BlogController extends Controller
 {
     public function index()
     {
-        return view('public.blogs.index');
+        $categories = Category::withCount('posts')->get();
+        $posts = Post::with('category', 'user')->where('status', 'published')->latest()->paginate(6);
+        return view('frontend.blogs.index', compact('categories', 'posts'));
     }
 
-    public function showBlog(){
-        $categories = Category::all();
-        $posts = Post::all();
-        
-        if($posts->status !== 'published'){
-            abort(404);
-        }
-        return view('public.blog-details', compact('categories', 'posts'));
+    public function showBlog(Request $request, $id){
+        $post = Post::with('category', 'user')
+            ->where('id', $id)
+            ->where('status', 'published')
+            ->firstOrFail();       
+
+        return view('frontend.blogs.blog_details', compact('post'));
     }
 
-    public function showCategory($slug)
+    public function showAllCategories(Request $request)
     { 
-        // Logic to retrieve category by slug and its posts can be added here
-        return view('public.category', compact('slug'));
+        $categories = Category::withCount('posts')->get();
+        $posts = Post::with('category')->where('status', 'published')->latest()->paginate(6);
+        return view('frontend.categories.categories', compact('categories', 'posts'));
     }
 
-
+    public function categoryDetails($id){
+        $category = Category::findOrFail($id);
+        $posts = Post::with('category')->where('category_id', $id)->where('status', 'published')->latest()->paginate(6);
+        return view('frontend.categories.category-details', compact('category', 'posts'));
+    }
 }

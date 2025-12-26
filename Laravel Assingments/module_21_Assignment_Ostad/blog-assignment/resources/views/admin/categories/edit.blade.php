@@ -34,7 +34,7 @@
         <!-- Sidebar -->
         <aside class="w-64 bg-dark min-h-screen fixed left-0 top-0">
             <div class="p-6">
-                <a href="../index.html" class="flex items-center space-x-2 text-white mb-8">
+                <a href="{{ route('home') }}" class="flex items-center space-x-2 text-white mb-8">
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                     </svg>
@@ -84,7 +84,7 @@
         <main class="flex-1 ml-64">
             <header class="bg-white shadow-sm px-8 py-4">
                 <div class="flex items-center gap-4">
-                    <a href="categories.html" class="p-2 hover:bg-gray-100 rounded-lg transition">
+                    <a href="{{ route('categories.index') }}" class="p-2 hover:bg-gray-100 rounded-lg transition">
                         <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                         </svg>
@@ -144,11 +144,11 @@
                                             <span class="text-white font-bold">None</span>
                                         @endif
                                     </div>
-                                    <form action="{{ route('categories.removeImage', $category->id) }}" method="POST">
+                                    <!-- <form action="{{ route('categories.removeImage', $category->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-500 text-sm hover:underline">Remove Image</button>
-                                    </form>
+                                    </form> -->
                                 </div>
                             </div>
 

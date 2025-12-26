@@ -66,14 +66,14 @@ class CategoryController extends Controller
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
-    public function categoryImageRemove($id){
-        $category = Category::findOrFail($id);
-        if($category->image){
-            Storage::disk('public')->delete($category->image);
-        }
-        $category->update(['image' => null]);
-        return back()->with('success', 'Category Image removed successfully.');
-    }
+    // public function categoryImageRemove($id){
+    //     $category = Category::findOrFail($id);
+    //     if($category->image){
+    //         Storage::disk('public')->delete($category->image);
+    //     }
+    //     $category->update(['image' => null]);
+    //     return back()->with('success', 'Category Image removed successfully.');
+    // }
 
     public function deleteCategory($id){
         $category = Category::findOrFail($id);

@@ -220,7 +220,7 @@
                                         <div class="flex justify-end items-center w-32 gap-3">
                                             <!-- View -->
                                             @if($post->status === 'published')
-                                            <a href="{{ route('blog.details', $post->slug) }}" target="_blank" class="p-2 text-gray-500 hover:bg-gray-100 rounded-lg transition" title="View">
+                                            <a href="{{ route('blog.details', $post->id) }}" target="_blank" class="p-2 text-gray-500 hover:bg-gray-100 rounded-lg transition" title="View">
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -254,6 +254,7 @@
                         </table>
                     </div>
 
+                    <!-- Pagination -->
                     <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
                         <p class="text-sm text-gray-600">
                             Showing {{ $allPosts->firstItem() }} to {{ $allPosts->lastItem() }} of {{ $allPosts->total() }} results
@@ -262,29 +263,25 @@
                         <nav class="flex items-center gap-2">
                             <!-- Previous Button -->
                             @if ($allPosts->onFirstPage())
-                            <span class="px-3 py-1 bg-gray-100 text-gray-400 rounded cursor-not-allowed">Previous</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-400 rounded cursor-not-allowed">Previous</span>
                             @else
-                            <a href="{{ $allPosts->previousPageUrl() }}" class="px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition">
-                                Previous
-                            </a>
+                                <a href="{{ $allPosts->previousPageUrl() }}" class="px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition"> Previous </a>
                             @endif
 
                             <!-- Page Numbers -->
                             @foreach ($allPosts->getUrlRange(max(1, $allPosts->currentPage() - 1), min($allPosts->lastPage(), $allPosts->currentPage() + 1)) as $page => $url)
-                            @if ($page == $allPosts->currentPage())
-                            <span class="px-3 py-1 bg-primary text-white rounded">{{ $page }}</span>
-                            @else
-                            <a href="{{ $url }}" class="px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition">{{ $page }}</a>
-                            @endif
+                                @if ($page == $allPosts->currentPage())
+                                    <span class="px-3 py-1 bg-primary text-white rounded">{{ $page }}</span>
+                                @else
+                                    <a href="{{ $url }}" class="px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition">{{ $page }}</a>
+                                @endif
                             @endforeach
 
                             <!-- Next Button -->
                             @if ($allPosts->hasMorePages())
-                            <a href="{{ $allPosts->nextPageUrl() }}" class="px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition">
-                                Next
-                            </a>
+                                <a href="{{ $allPosts->nextPageUrl() }}" class="px-3 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition">Next</a>
                             @else
-                            <span class="px-3 py-1 bg-gray-100 text-gray-400 rounded cursor-not-allowed">Next</span>
+                                <span class="px-3 py-1 bg-gray-100 text-gray-400 rounded cursor-not-allowed">Next</span>
                             @endif
                         </nav>
                     </div>

@@ -45,16 +45,20 @@
     <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <a href="index.html" class="flex items-center space-x-2">
+                <a href="{{ route('home') }}" class="flex items-center space-x-2">
                     <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                     </svg>
                     <span class="text-xl font-bold text-dark">Simple Blog</span>
                 </a>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-600 hover:text-primary transition">Home</a>
-                    <a href="category.html" class="text-gray-600 hover:text-primary transition">Categories</a>
-                    <a href="login.html" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition">Login</a>
+                    <a href="{{ route('home') }}" class="text-gray-600 hover:text-primary transition">Home</a>
+                    <a href="{{ route('categories.index') }}" class="text-gray-600 hover:text-primary transition">Categories</a>
+                    @if (Auth::check())
+                        <a href="{{ route('admin.dashboard') }}" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition">Dashboard</a>
+                    @else
+                        <a href="{{ route('auth.login') }}" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition">Login</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -68,11 +72,11 @@
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
-                <a href="{{ route('categories.index', $posts->category->slug) }}" class="hover:text-primary transition">{{ $posts->category->name }}</a>
+                <a href="{{ route('category-details', $post->category->id) }}" class="hover:text-primary transition">{{ $post->category->name }}</a>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
-                <span class="text-dark font-medium">{{ $posts->title }}</span>
+                <span class="text-dark font-medium">{{ $post->title }}</span>
             </nav>
         </div>
     </div>
@@ -83,21 +87,21 @@
             <!-- Header -->
             <header class="mb-8">
                 <div class="flex items-center gap-3 mb-4">
-                    <a href="{{ route('categories.index', $posts->category->slug) }}" class="bg-blue-100 text-blue-600 text-sm font-medium px-3 py-1 rounded-full hover:bg-blue-200 transition">
-                        {{ $posts->category->name }}
+                    <a href="{{ route('category-details', $post->category->id) }}" class="bg-blue-100 text-blue-600 text-sm font-medium px-3 py-1 rounded-full hover:bg-blue-200 transition">
+                        {{ $post->category->name }}
                     </a>
                     <span class="text-gray-400">•</span>
-                    <span class="text-gray-500">{{ $posts->created_at->format('F j, Y') }}</span>
+                    <span class="text-gray-500">{{ $post->created_at->format('F j, Y') }}</span>
                 </div>
                 <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-dark mb-6 leading-tight">
-                    {{ $posts->title }}
+                    {{ $post->title }}
                 </h1>
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 bg-gradient-to-br from-primary to-blue-400 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                        JD
+                        {{ strtoupper(substr($post->user->name, 0, 2)) }}
                     </div>
                     <div>
-                        <p class="font-medium text-dark">{{ $posts->user->name }}</p>
+                        <p class="font-medium text-dark">{{ $post->user->name }}</p>
                         <p class="text-sm text-gray-500">Full Stack Developer</p>
                     </div>
                 </div>
@@ -105,21 +109,21 @@
 
             <!-- Featured Image -->
             <div class="mb-10 rounded-2xl overflow-hidden shadow-lg">
-                <img src="{{ asset('storage/' . $posts->image) }}" alt="Laravel Development" class="w-full h-64 md:h-96 object-cover">
+                <img src="{{ asset('storage/' . $post->image) }}" alt="{{$post->category->slug}}" class="w-full h-64 md:h-96 object-cover">
             </div>
 
             <!-- Content -->
             <div class="prose text-gray-700 text-lg">
-                {!! $posts->content !!}
+                {!! $post->content !!}
             </div>
 
             <!-- Tags -->
             <div class="mt-10 pt-8 border-t">
                 <div class="flex flex-wrap gap-2">
                     <span class="text-gray-600 font-medium">Tags:</span>
-                    <a href="{{ route('categories.index', $posts->category->slug) }}" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition">{{ $posts->category->name }}</a>
-                    <a href="{{ route('categories.index', $posts->category->slug) }}" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition">{{ $posts->category->name }}</a>
-                    <a href="{{ route('categories.index', $posts->category->slug) }}" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition">{{ $posts->category->name }}</a>
+                    <a href="{{ route('category-details', $post->category->id) }}" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition">{{ $post->category->name }}</a>
+                    <a href="{{ route('category-details', $post->category->id) }}" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition">{{ $post->category->name }}</a>
+                    <a href="{{ route('category-details', $post->category->id) }}" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition">{{ $post->category->name }}</a>
                 </div>
             </div>
 
@@ -131,8 +135,8 @@
                     </svg>
                     Back to Home
                 </a>
-                <a href="{{ route('categories.index', $posts->category->slug) }}" class="flex items-center justify-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-dark transition">
-                    More from Technology
+                <a href="{{ route('category-details', $post->category->id) }}" class="flex items-center justify-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-dark transition">
+                    {{ ucfirst($post->category->name) }} Posts
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                     </svg>
@@ -141,52 +145,26 @@
         </div>
     </article>
 
-    <!-- Related Posts
+    <!-- Related post -->
     <section class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-dark mb-8">More from {{ $posts->category->name }}</h2>
+            <h2 class="text-2xl font-bold text-dark mb-8">Recent post from {{ $post->category->name }}</h2>
             <div class="grid md:grid-cols-3 gap-6">
                 <!-- Related Post 1 -->
                 <article class="bg-light rounded-xl overflow-hidden hover:shadow-lg transition group">
                     <div class="h-40 bg-gradient-to-br from-teal-400 to-teal-600 relative overflow-hidden">
-                        <img src="{{ asset('storage/' . $posts->image) }}" alt="Post" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <img src="{{ asset('storage/' . $post->image) }}" alt="Post" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                     </div>
                     <div class="p-5">
-                        <p class="text-sm text-gray-500 mb-2">Dec 10, 2024</p>
+                        <p class="text-sm text-gray-500 mb-2">{{ $post->created_at->format('M d, Y') }}</p>
                         <h3 class="font-bold text-dark group-hover:text-primary transition">
-                            <a href="blog-details.html">Building RESTful APIs with Laravel</a>
-                        </h3>
-                    </div>
-                </article>
-
-                <!-- Related Post 2 -->
-                <article class="bg-light rounded-xl overflow-hidden hover:shadow-lg transition group">
-                    <div class="h-40 bg-gradient-to-br from-indigo-400 to-indigo-600 relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400" alt="Post" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    </div>
-                    <div class="p-5">
-                        <p class="text-sm text-gray-500 mb-2">Dec 8, 2024</p>
-                        <h3 class="font-bold text-dark group-hover:text-primary transition">
-                            <a href="blog-details.html">Understanding Eloquent ORM</a>
-                        </h3>
-                    </div>
-                </article>
-
-                <!-- Related Post 3 -->
-                <article class="bg-light rounded-xl overflow-hidden hover:shadow-lg transition group">
-                    <div class="h-40 bg-gradient-to-br from-cyan-400 to-cyan-600 relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400" alt="Post" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    </div>
-                    <div class="p-5">
-                        <p class="text-sm text-gray-500 mb-2">Dec 5, 2024</p>
-                        <h3 class="font-bold text-dark group-hover:text-primary transition">
-                            <a href="blog-details.html">Laravel Middleware Explained</a>
+                            <a href="{{ route('blog.details', $post->id) }}">{{ $post->title }}</a>
                         </h3>
                     </div>
                 </article>
             </div>
         </div>
-    </section> -->
+    </section>
 
     <!-- Footer -->
     <footer class="bg-dark text-white py-12">

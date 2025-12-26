@@ -12,8 +12,11 @@ use Termwind\Components\Raw;
 //     return view('welcome');
 // });
 
-Route::get('/', [BlogController::class, 'home'])->name('home');
-Route::get('/blog-details', [BlogController::class, 'showBlog'])->name('blog.details');
+Route::get('/', [BlogController::class, 'index'])->name('home');
+Route::get('/blog-details/{slug}', [BlogController::class, 'showBlog'])->name('blog.details');
+
+Route::get('/categories', [BlogController::class, 'showAllCategories'])->name('category-index');
+Route::get('/category/{id}', [BlogController::class, 'categoryDetails'])->name('category-details');
 
 Route::middleware('guest')->group( function () {
     Route::get('/registration', [AuthController::class, 'registration'])->name('auth.registration');
