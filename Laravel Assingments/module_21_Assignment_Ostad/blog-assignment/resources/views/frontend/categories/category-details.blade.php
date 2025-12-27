@@ -1,66 +1,7 @@
-<!DOCTYPE html>
-<html lang="bn">
+@extends('layouts.app')
+@section('title', 'Cateogry Index | Simple Blog')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technology - Category | Simple Blog</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1e40af',
-                        'primary-dark': '#1e3a8a',
-                        secondary: '#f59e0b',
-                        accent: '#10b981',
-                        dark: '#1f2937',
-                        light: '#f3f4f6'
-                    },
-                    fontFamily: {
-                        'bengali': ['Hind Siliguri', 'sans-serif'],
-                        'sans': ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Inter', 'Hind Siliguri', sans-serif;
-        }
-    </style>
-</head>
-
-<body class="bg-light min-h-screen">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <a href="{{ route('home') }}" class="flex items-center space-x-2">
-                    <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                    </svg>
-                    <span class="text-xl font-bold text-dark">Simple Blog</span>
-                </a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ route('home') }}" class="text-gray-600 hover:text-primary transition">Home</a>
-                    <a href="{{ route('category-index') }}" class="text-primary font-medium">Categories</a>
-                    @if(Auth::check())
-                    <a href="{{ route('admin.dashboard') }}" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition">Dashboard</a>
-                    @else
-                    <a href="{{ route('auth.login') }}" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition">Login</a>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Category Header -->
+@section('content')
 
     <section class="{{ $category->color['card'] }} text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -179,23 +120,4 @@
             @endif
         </div>
     </section>
-
-
-
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <div class="flex items-center justify-center space-x-2 mb-4">
-                    <svg class="w-8 h-8 text-secondary" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                    </svg>
-                    <span class="text-xl font-bold">Simple Blog</span>
-                </div>
-                <p class="text-gray-400">&copy; 2024 Simple Blog. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-</body>
-
-</html>
+@endsection
