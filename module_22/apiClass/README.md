@@ -1,59 +1,303 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📘 API Documentation — API-C03
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 1. Overview
 
-## About Laravel
+**API-C03** is a RESTful backend API built with **Laravel**, designed to support authentication and core application features such as task management.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The API uses **Laravel Sanctum** for secure, token-based authentication and communicates exclusively using **JSON**.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This documentation describes the available endpoints, authentication mechanism, request requirements, and usage guidelines.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 2. Base URL
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+```
+http://127.0.0.1:8000/api
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+All endpoints are versioned under:
 
-## Laravel Sponsors
+```
+/v1
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 3. Authentication
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Authentication Method
 
-## Contributing
+* **Laravel Sanctum**
+* Token-based authentication
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Required Headers (for protected routes)
 
-## Code of Conduct
+```
+Authorization: Bearer {access_token}
+Accept: application/json
+Content-Type: application/json
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+> ⚠️ Any request to protected endpoints without a valid Bearer token will be rejected with an authentication error.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 4. Authentication Module (Auth)
 
-## License
+### 4.1 Register User
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Endpoint**
+
+```
+POST /v1/register
+```
+
+**Description**
+Registers a new user and creates an account.
+
+**Request Body**
+
+```json
+{
+  "name": "Hassan",
+  "email": "hassan@mail.com",
+  "password": "robin5"
+}
+```
+
+**Response**
+
+* User created successfully
+* Authentication token may be returned (based on implementation)
+
+---
+
+### 4.2 Login User
+
+**Endpoint**
+
+```
+POST /v1/login
+```
+
+**Description**
+Authenticates a user and returns an access token.
+
+**Request Body**
+
+```json
+{
+  "email": "robin@mail.com",
+  "password": "123456"
+}
+```
+
+**Response**
+
+```json
+{
+  "access_token": "12|xxxxxxxxxxxxxxxx",
+  "token_type": "Bearer"
+}
+```
+
+---
+
+### 4.3 Logout User (Protected)
+
+**Endpoint**
+
+```
+POST /v1/logout
+```
+
+**Authentication Required** ✅
+
+**Description**
+Revokes the currently active access token.
+
+**Headers**
+
+```
+Authorization: Bearer {access_token}
+Accept: application/json
+```
+
+**Response**
+
+```json
+{
+  "message": "Logged out successfully"
+}
+```
+
+---
+
+### 4.4 User Profile (Protected)
+
+**Endpoint**
+
+```
+POST /v1/profile
+```
+
+**Authentication Required** ✅
+
+**Description**
+Returns authenticated user profile information.
+
+**Headers**
+
+```
+Authorization: Bearer {access_token}
+Accept: application/json
+```
+
+---
+
+## 5. Task Management Module
+
+All task-related endpoints are **protected** and require authentication.
+
+---
+
+### 5.1 Create Task
+
+**Endpoint**
+
+```
+POST /v1/store
+```
+
+**Authentication Required** ✅
+
+**Description**
+Creates a new task.
+
+**Headers**
+
+```
+Authorization: Bearer {access_token}
+Accept: application/json
+Content-Type: application/json
+```
+
+**Request Body**
+
+```json
+{
+  "title": "Task Title",
+  "description": "Task description"
+}
+```
+
+---
+
+### 5.2 Get All Tasks
+
+**Endpoint**
+
+```
+GET /v1/index
+```
+
+**Authentication Required** ✅
+
+**Description**
+Retrieves all tasks associated with the authenticated user.
+
+**Headers**
+
+```
+Authorization: Bearer {access_token}
+Accept: application/json
+```
+
+---
+
+### 5.3 Get Task by ID
+
+**Endpoint**
+
+```
+GET /v1/task/edit/{id}
+```
+
+**Authentication Required** ✅
+
+**Description**
+Retrieves a single task by its unique ID.
+
+**Example**
+
+```
+GET /v1/task/edit/27
+```
+
+---
+
+### 5.4 Delete Task
+
+**Endpoint**
+
+```
+DELETE /v1/task/delete/{id}
+```
+
+**Authentication Required** ✅
+
+**Description**
+Deletes a task by ID.
+
+**Example**
+
+```
+DELETE /v1/task/delete/27
+```
+
+---
+
+## 6. Error Handling
+
+All errors are returned in JSON format with appropriate HTTP status codes.
+
+### Example (Unauthorized)
+
+```json
+{
+  "message": "Unauthenticated."
+}
+```
+
+### Example (Validation Error)
+
+```json
+{
+  "message": "Validation failed",
+  "errors": {
+    "title": ["The title field is required."]
+  }
+}
+```
+
+---
+
+## 7. Notes & Best Practices
+
+* Always store the **access token** securely on the client side.
+* Use **Postman Environment Variables** for:
+
+  * `BASEURL`
+  * `access_token`
+* Tokens stored in `personal_access_tokens` table are **hashed** and cannot be reused manually.
+
+---
+
+## 8. Conclusion
+
+This API provides a secure and scalable foundation for authentication and task management using modern Laravel best practices.
+
+For testing and development, refer to the provided **Postman Collection (API-C03)** as the single source of truth.
+
+
