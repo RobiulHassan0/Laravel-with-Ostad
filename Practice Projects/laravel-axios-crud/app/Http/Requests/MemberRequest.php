@@ -25,7 +25,7 @@ class MemberRequest extends FormRequest
     {
         return [
             "name" => "required|string|max:20",
-            "email" => "required|string|max:20",
+            "email" => "required|string|max:50",
             'role' => 'required|string|in:Admin,User,Editor',
             'status' => 'required|string|in:Active,Pending,Inactive',
         ];

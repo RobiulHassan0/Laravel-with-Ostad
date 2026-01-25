@@ -128,7 +128,7 @@
             }
 
             try{
-                let url = 'api/v1/members';
+                let url = 'api/v1/logout';
                 let response = axios.post(url, {}, {
                     headers: {
                         'Authorization': 'Bearer ' + token
@@ -139,6 +139,31 @@
             }catch(error){
                 localStorage.removeItem('token');
                 window.location = "/";
+            }
+        }
+        
+        async function deleteMember(id){
+            let token = localStorage.getItem('token');
+            if(!token){
+                window.location = "/login";
+            }
+
+            if(!confirm("Are you sure want to delete this member? ")){
+                return;
+            }
+            try {
+                let response = await axios.delete(`/api/v1/members/${id}`, {
+                    headers: {
+                        'Authorization' : 'Bearer ' + token
+                    }
+                })
+                alert('Member deleted successfully!');
+                document.getElementById('members-data').innerHTML = "";
+                getAllMembers();
+
+            } catch (error) {
+                console.log(error.response?.data);
+                alert("Faild to delete member");
             }
         }
     </script>

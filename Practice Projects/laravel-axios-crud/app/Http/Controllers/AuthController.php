@@ -13,7 +13,7 @@ class AuthController extends Controller
         $data = $request->validate([
             "name" => "required|string|max:20",
             "email" => "required|string|max:50|email|unique:users",
-            "password" => "required|string|max:4",
+            "password" => "required|string|max:5",
         ]);
 
         $user = User::create([
@@ -35,7 +35,7 @@ class AuthController extends Controller
     public function login(Request $request){
         $data = $request->validate([
             "email" => "required|string|email",
-            "password"=> "required|string|max:4",
+            "password"=> "required|string|max:5",
         ]);
 
         $user = User::where("email", $data["email"])->first();

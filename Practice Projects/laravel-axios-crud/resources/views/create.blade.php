@@ -71,7 +71,7 @@
 
       <!-- Submit Button -->
       <div class="pt-4">
-        <button type="submit" onclick="addNewMember()"
+        <button type="submit" onclick="addNewMember(event)"
           class="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-xl shadow-lg transition-transform active:scale-95">
           Create User
         </button>
@@ -85,7 +85,8 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
-        async function addNewMember() {
+        async function addNewMember(event) {
+          event.preventDefault();
             let token = localStorage.getItem('token')
             if (!token) {
                 window.location = '/login'
@@ -106,7 +107,7 @@
 
             try {
                 let url = '/api/v1/members';
-                let response = await axios.get(url, obj, {
+                let response = await axios.post(url, obj, {
                     headers: {
                         'Authorization': 'Bearer ' + token
                     }
@@ -115,9 +116,9 @@
                 window.location = "/"
 
             } catch (error) {
-                alert('Failed to load members data');
+              console.log(error.response.data);
+              alert(error.response.data.message);
             }
-
         }
   </script>
 </body>
