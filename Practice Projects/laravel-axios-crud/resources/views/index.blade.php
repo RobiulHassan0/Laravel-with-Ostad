@@ -49,11 +49,11 @@
         <!-- Pagination -->
 
         <div class="flex justify-between">
-            <div class="mt-6">
+            <div class="mt-8">
                 <button onclick="logOut()"
                     class="px-4 py-2 rounded-lg bg-purple-700 text-white font-semibold hover:bg-purple-800 transition">LogOut</button>
             </div>
-            <div class="flex justify-end mt-6 gap-2">
+            <div class="flex justify-end mt-8 gap-2">
                 <button
                     class="px-4 py-2 rounded-lg bg-pink-600 text-white font-semibold hover:bg-pink-700 transition">Prev</button>
                 <button
@@ -64,7 +64,7 @@
                     class="px-4 py-2 rounded-lg bg-pink-600 text-white font-semibold hover:bg-pink-700 transition">3</button>
                 <button
                     class="px-4 py-2 rounded-lg bg-pink-600 text-white font-semibold hover:bg-pink-700 transition">Next</button>
-            </div>
+            </div>''
         </div>
     </div>
 
