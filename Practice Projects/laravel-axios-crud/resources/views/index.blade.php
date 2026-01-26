@@ -22,7 +22,7 @@
                 class="w-full md:w-1/3 px-5 py-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-pink-500 transition" />
             <button
                 class="px-7 py-3 bg-pink-600 text-white rounded-lg shadow-lg hover:bg-pink-700 active:scale-95 transition-transform font-semibold">
-               <a href="/create">+ Add New User</a> 
+                <a href="/create">+ Add New User</a>
             </button>
         </div>
 
@@ -50,7 +50,8 @@
 
         <div class="flex justify-between">
             <div class="mt-6">
-                <button onclick="logOut()" class="px-4 py-2 rounded-lg bg-purple-700 text-white font-semibold hover:bg-purple-800 transition">LogOut</button>
+                <button onclick="logOut()"
+                    class="px-4 py-2 rounded-lg bg-purple-700 text-white font-semibold hover:bg-purple-800 transition">LogOut</button>
             </div>
             <div class="flex justify-end mt-6 gap-2">
                 <button
@@ -88,6 +89,8 @@
                 let members = response.data.data['data'];
 
                 members.forEach((member) => {
+                    let statusColor = getStatusColor(member['status']);
+
                     document.getElementById('members-data').innerHTML += (`
                     <tr class="hover:bg-pink-50 transition-colors cursor-default">
                         <td class="px-6 py-4 border-r border-gray-200">${member['id']}</td>
@@ -96,7 +99,7 @@
                         <td class="px-6 py-4 border-r border-gray-200">${member['role']}</td>
                         <td class="px-6 py-4 border-r border-gray-200">
                             <span
-                                class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-800 text-xs font-semibold">
+                                class="inline-block px-3 py-1 rounded-full text-xs font-semibold ${statusColor}"> 
                                 ${member['status']}
                             </span>
                         </td>
@@ -106,6 +109,7 @@
                         </td>
                     </tr>
                 `)
+                
                 });
             } catch (error) {
                 if (error.response && error.response.status === 401) {
@@ -119,15 +123,19 @@
 
 
         }
-    
-        async function logOut(){
+
+        async function editMember(id) {
+            window.location = `/edit?id=${id}`;
+        }
+
+        async function logOut() {
             let token = localStorage.getItem('token');
-            if(!token){
+            if (!token) {
                 window.location = "/";
                 return;
             }
 
-            try{
+            try {
                 let url = 'api/v1/logout';
                 let response = axios.post(url, {}, {
                     headers: {
@@ -136,25 +144,25 @@
                 })
                 localStorage.removeItem('token');
                 window.location = "/";
-            }catch(error){
+            } catch (error) {
                 localStorage.removeItem('token');
                 window.location = "/";
             }
         }
-        
-        async function deleteMember(id){
+
+        async function deleteMember(id) {
             let token = localStorage.getItem('token');
-            if(!token){
+            if (!token) {
                 window.location = "/login";
             }
 
-            if(!confirm("Are you sure want to delete this member? ")){
+            if (!confirm("Are you sure want to delete this member? ")) {
                 return;
             }
             try {
                 let response = await axios.delete(`/api/v1/members/${id}`, {
                     headers: {
-                        'Authorization' : 'Bearer ' + token
+                        'Authorization': 'Bearer ' + token
                     }
                 })
                 alert('Member deleted successfully!');
@@ -165,6 +173,13 @@
                 console.log(error.response?.data);
                 alert("Faild to delete member");
             }
+        }
+
+        function getStatusColor(status) {
+            if(status === 'Active') return "bg-green-100 text-green-800";
+            if(status === 'Pending') return "bg-yellow-100 text-yellow-800";
+            if(status === 'Inactive') return "bg-red-100 text-red-800";
+            return '';
         }
     </script>
 </body>
