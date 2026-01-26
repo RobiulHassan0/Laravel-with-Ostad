@@ -64,7 +64,7 @@
                     class="px-4 py-2 rounded-lg bg-pink-600 text-white font-semibold hover:bg-pink-700 transition">3</button>
                 <button
                     class="px-4 py-2 rounded-lg bg-pink-600 text-white font-semibold hover:bg-pink-700 transition">Next</button>
-            </div>''
+            </div>
         </div>
     </div>
 
