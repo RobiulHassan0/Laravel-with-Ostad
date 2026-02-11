@@ -29,7 +29,7 @@ class Product extends Model
         'low_stock_threshhold' => 'integer',
         'weight' => 'decimal:2',
         'price' => 'decimal:2',
-        'status' => 'boolean '
+        'status' => 'boolean'
     ];
 
     public function category(){
