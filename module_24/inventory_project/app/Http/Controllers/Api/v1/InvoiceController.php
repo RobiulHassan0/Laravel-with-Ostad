@@ -189,7 +189,7 @@ class InvoiceController extends Controller
                 'discount_value' => ['required', 'numeric', 'min:0'],
                 'discount_amount' => ['sometimes', 'nullable', 'numeric', 'min:0'],
                 'grand_total' => ['sometimes', 'required', 'numeric', 'min:0'],
-                'status' => "sometimes|string|in:draft,finalized,cancelled"
+                'status' => "sometimes|string|in:draft,finalized,cancelled",
             ]);
 
             DB::beginTransaction();
