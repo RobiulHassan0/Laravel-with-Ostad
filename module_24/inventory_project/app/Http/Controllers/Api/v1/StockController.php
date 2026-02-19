@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\StockMovement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class StockController extends Controller
@@ -18,9 +19,10 @@ class StockController extends Controller
             return response()->json([
                 "success" => true,
                 "message" => "Stock movements list fetched successfully",
-                'stock-movements-data' => $stockMovements
+                'stock_movements_data' => $stockMovements
             ], 200);
         }catch(\Throwable $e){
+            Log::error($e);
             return response()->json([
                 'success'=> false,
                 'message'=> "Something went wrong while fetching stock movements"
