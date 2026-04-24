@@ -291,7 +291,7 @@ class InvoiceController extends Controller
         $year = Carbon::now()->format('Y');
         $month = Carbon::now()->format('m');
 
-        $lastInvoice = Invoice::where('invoice_no', 'like', "INV-{$year}-{$month}%")->orderByDesc('invoice_no')->first();
+        $lastInvoice = Invoice::where('invoice_no', 'like', "INV-{$year}-{$month}%")->latest('id')->first();
         
         if($lastInvoice){
             $sequence = (int) substr($lastInvoice->invoice_no, -4);
