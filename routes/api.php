@@ -41,9 +41,9 @@ Route::prefix('v1')->group(function () {
 
         // Invoices Routes
         Route::get('/invoices', [InvoiceController::class, 'index']);
-        Route::post('/invoices', [InvoiceController::class, 'store']);
-        Route::get('/invoices/{id}', [InvoiceController::class, 'show']);
-        Route::put('/invoices/{id}', [InvoiceController::class, 'update']);
-        Route::delete('/invoices/{id}', [InvoiceController::class, 'delete']);
+        Route::post('/invoice', [InvoiceController::class, 'store']);
+        Route::get('/invoice/{id}', [InvoiceController::class, 'show']);
+        Route::put('/invoice/{id}', [InvoiceController::class, 'update']);
+        Route::delete('/invoice/{id}', [InvoiceController::class, 'delete']);
     });
 });

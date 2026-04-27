@@ -1,4 +1,4 @@
-{{-- View Invoice Modal --}}
+
 
 <div class="modal fade" id="invoiceShowModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -20,7 +20,7 @@
     </div>
 </div>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script>
 
         function viewInvoice(id){
@@ -220,4 +220,4 @@
 
         // }
     </script>
-@endpush
+<?php $__env->stopPush(); ?><?php /**PATH C:\xampp\htdocs\Full Stack Laravel Projects by Ostad\inventory_project\resources\views/admin/invoices/show.blade.php ENDPATH**/ ?>

@@ -142,7 +142,7 @@
         // API URLS
         let productsUrl = '{{ url("/api/v1/products") }}';
         let categoriesUrl = '{{ url("/api/v1/categories") }}';
-        let invoiceUrl = '{{ url("/api/v1/invoices") }}';
+        let invoiceUrl = '{{ url("/api/v1/invoice") }}';
 
         // Data holders or sates
         let allProducts = [];

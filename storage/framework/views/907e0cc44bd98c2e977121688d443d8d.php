@@ -1,12 +1,12 @@
-@extends('layouts.admin')
-@section('title', 'Invoices')
 
-@section('content')
+<?php $__env->startSection('title', 'Invoices'); ?>
+
+<?php $__env->startSection('content'); ?>
 
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
             <span>Invoice List</span>
-            <a href="{{ route('pos') }}" class="btn btn-sm btn-primary">
+            <a href="<?php echo e(route('pos')); ?>" class="btn btn-sm btn-primary">
                 <i class="bi bi-plus-lg me-1"></i> New Invoice (POS)
             </a>
         </div>
@@ -35,16 +35,16 @@
         </div>
     </div>
 
-@include('admin.invoices.show')
+<?php echo $__env->make('admin.invoices.show', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
-    @push('scripts')
+    <?php $__env->startPush('scripts'); ?>
         <script>
             let invoicesData = [];
 
             getInvoices();
 
             async function getInvoices() {
-                let URL = '{{ url("/api/v1/invoices") }}';
+                let URL = '<?php echo e(url("/api/v1/invoices")); ?>';
                 let token = localStorage.getItem('token');
                 let tbody = document.getElementById('invoicesTableBody');
 
@@ -150,5 +150,6 @@
             }
         </script>
 
-    @endpush
-@endsection
+    <?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\Full Stack Laravel Projects by Ostad\inventory_project\resources\views/admin/invoices/index.blade.php ENDPATH**/ ?>
