@@ -44,6 +44,6 @@ Route::prefix('v1')->group(function () {
         Route::post('/invoice', [InvoiceController::class, 'store']);
         Route::get('/invoice/{id}', [InvoiceController::class, 'show']);
         Route::put('/invoice/{id}', [InvoiceController::class, 'update']);
-        Route::delete('/invoice/{id}', [InvoiceController::class, 'delete']);
+        Route::delete('/invoice/{id}', [InvoiceController::class, 'destroy']);
     });
 });

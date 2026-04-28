@@ -36,6 +36,8 @@
     </div>
 
 <?php echo $__env->make('admin.invoices.show', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php echo $__env->make('admin.invoices.delete', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php echo $__env->make('admin.invoices.finalize', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
     <?php $__env->startPush('scripts'); ?>
         <script>
@@ -68,14 +70,13 @@
                         let status = item.status || 'draft';
 
                         let discountHtml = '-'; 
-
                         if(discountAmount > 0){
                             let discountLabel = '';
                             
                             if(item.discount_type === 'percent'){
                                 discountLabel = parseFloat(item.discount_value || 0) + '%';
                             }else if( item.discount_type === 'fixed'){
-                                discountLabel = 'Fixed Discount';
+                                discountLabel = 'Fixed';
                             }
 
                             discountHtml = `<span class="text-danger">-$${discountAmount.toFixed(2)}</span>`;

@@ -20,7 +20,7 @@
     </div>
 </div>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script>
         function deleteInvoice(id){
             document.getElementById('invoiceDeleteId').value = id;
@@ -34,7 +34,7 @@
             let deleteBtn = document.getElementById('invoiceDeleteBtn');
             
             // Perform the delete operation here
-            let URL = '{{ url("api/v1/invoice") }}/' + id; // Assuming your API endpoint for deleting an invoice is /api/v1/invoice/{id}
+            let URL = '<?php echo e(url("api/v1/invoice")); ?>/' + id; // Assuming your API endpoint for deleting an invoice is /api/v1/invoice/{id}
             let token = localStorage.getItem('token'); // Assuming you have the token stored in localStorage
             deleteBtn.disabled = true; // Disable the button to prevent multiple clicks
 
@@ -63,4 +63,4 @@
 
         }
     </script>    
-@endpush
+<?php $__env->stopPush(); ?><?php /**PATH C:\xampp\htdocs\Full Stack Laravel Projects by Ostad\inventory_project\resources\views/admin/invoices/delete.blade.php ENDPATH**/ ?>

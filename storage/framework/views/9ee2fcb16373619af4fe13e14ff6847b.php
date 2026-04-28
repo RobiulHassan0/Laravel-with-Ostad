@@ -62,15 +62,15 @@
                 let itemDiscountHtml = '-';
                 
                 if(itemDiscount > 0){
-                    let label = '';
+                    let itemLabel = '';
 
                     if(item.discount_type === 'percent'){
-                        label = `${parseFloat(item.discount_value || 0).toFixed(2)}%`;
+                        itemLabel = `(${parseFloat(item.discount_value || 0)}%)`; 
                     }else if(item.discount_type === 'fixed'){
-                        label = 'Fixed Discount';
+                        itemLabel = ' (Fixed)';
                     }
 
-                    itemDiscountHtml =  `<span class="text-danger">-$${itemDiscount.toFixed(2)}</span><span class="text-muted small">${label}</span>`;
+                    itemDiscountHtml =  `<span class="text-danger">-$${itemDiscount.toFixed(2)}</span><span class="text-muted small"> ${itemLabel} </span>`;
                 }
 
                 itemsRows += `
@@ -102,9 +102,9 @@
                 let label = "";
 
                 if(invoice.discount_type === 'percent'){
-                    label = parseFloat(invoice.discount_value || 0) + '%';
+                    label = `(${parseFloat(invoice.discount_value || 0)}%)`;
                 }else if( invoice.discount_type === 'fixed'){
-                    label = 'Fixed Discount';
+                    label = ' (Fixed)';
                 }
                 invoiceDiscountHtml = `-$${discountAmount.toFixed(2)} <span class="text-muted small">${label}</span>`;
             }

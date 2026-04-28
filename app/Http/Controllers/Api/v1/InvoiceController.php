@@ -255,7 +255,7 @@ class InvoiceController extends Controller
         }
     }
 
-    public function destroy(int $id){
+    public function destroy(Request $request, int $id){
         try{
             $invoice = Invoice::findOrFail($id);
 

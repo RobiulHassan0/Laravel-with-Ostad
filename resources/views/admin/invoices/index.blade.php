@@ -36,6 +36,8 @@
     </div>
 
 @include('admin.invoices.show')
+@include('admin.invoices.delete')
+@include('admin.invoices.finalize')
 
     @push('scripts')
         <script>
@@ -68,14 +70,13 @@
                         let status = item.status || 'draft';
 
                         let discountHtml = '-'; 
-
                         if(discountAmount > 0){
                             let discountLabel = '';
                             
                             if(item.discount_type === 'percent'){
                                 discountLabel = parseFloat(item.discount_value || 0) + '%';
                             }else if( item.discount_type === 'fixed'){
-                                discountLabel = 'Fixed Discount';
+                                discountLabel = 'Fixed';
                             }
 
                             discountHtml = `<span class="text-danger">-$${discountAmount.toFixed(2)}</span>`;
