@@ -44,8 +44,8 @@ class InvoiceController extends Controller
                 'invoiceItems.*.quantity' => 'required|integer|min:1',
                 'invoiceItems.*.unit_price' => 'required|numeric|min:1',
                 'invoiceItems.*.discount_type' => 'nullable|string|in:fixed,percent',
-                'invoiceItems.*.discount_value' => 'nullable|numeric|min:0',
-                'invoiceItems.*.discount_amount' => 'nullable|numeric|min:0',
+                'invoiceItems.*.discount_value' => 'required|numeric|min:0',
+                'invoiceItems.*.discount_amount' => 'required|numeric|min:0',
                 'invoiceItems.*.line_total' => 'required|numeric|min:0',
 
                 'subtotal' => 'required|numeric|min:0',
@@ -67,9 +67,9 @@ class InvoiceController extends Controller
                 'invoice_date' => $validated['invoice_date'],
                 'subtotal' => $validated['subtotal'],
                 'discount_type' => $validated['discount_type'] ?? null,
-                'discount_value' => $validated['discount_value'] ?? null,
-                'discount_amount' => $validated['discount_amount'] ?? null,
-                'grand_total' => $validated['grand_total'] ?? null,
+                'discount_value' => $validated['discount_value'],
+                'discount_amount' => $validated['discount_amount'],
+                'grand_total' => $validated['grand_total'],
                 'status' => $validated['status'] ?? 'draft',
             ]);
 

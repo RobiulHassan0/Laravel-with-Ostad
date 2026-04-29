@@ -14,7 +14,7 @@ class InvoiceItem extends Model
         'product_id',
         'quantity',
         'unit_price',
-        'dicount_type',
+        'discount_type',
         'discount_amount',
         'discount_value',
         'line_total',

@@ -74,9 +74,9 @@
                             let discountLabel = '';
                             
                             if(item.discount_type === 'percent'){
-                                discountLabel = parseFloat(item.discount_value || 0) + '%';
+                                discountLabel = `${parseFloat(item.discount_value || 0)}%`;
                             }else if( item.discount_type === 'fixed'){
-                                discountLabel = 'Fixed';
+                                discountLabel = `Fixed`;
                             }
 
                             discountHtml = `<span class="text-danger">-$${discountAmount.toFixed(2)}</span>`;

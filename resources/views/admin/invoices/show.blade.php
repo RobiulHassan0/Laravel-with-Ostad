@@ -65,12 +65,12 @@
                     let itemLabel = '';
 
                     if(item.discount_type === 'percent'){
-                        itemLabel = `(${parseFloat(item.discount_value || 0)}%)`; 
+                        itemLabel = `${parseFloat(item.discount_value || 0)}%`;
                     }else if(item.discount_type === 'fixed'){
-                        itemLabel = ' (Fixed)';
+                        itemLabel = `Fixed`;
                     }
-
-                    itemDiscountHtml =  `<span class="text-danger">-$${itemDiscount.toFixed(2)}</span><span class="text-muted small"> ${itemLabel} </span>`;
+ 
+                    itemDiscountHtml =  `<span class="text-danger">-$${itemDiscount.toFixed(2)}</span><span class="text-muted small"> (${itemLabel ? itemLabel : '-'})</span>`;
                 }
 
                 itemsRows += `

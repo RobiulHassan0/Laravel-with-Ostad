@@ -60,16 +60,17 @@
 
                     <!-- Totals -->
                     <div class="border-top p-3 bg-light" style="display: none" id="totalSelection">
-                        <!-- Subtotal -->
-                        <div class="d-flex justify-content-between mb-2">
-                            <span class="text-muted">Subtotal</span>
-                            <span id="subtotalDisplay">$ 0.00</span>
-                        </div>
-
+                        
                         <!-- Item discounts total -->
                         <div class="d-flex justify-content-between mb-2 text-danger" style="display: none" id="itemDiscountRow">
                             <span>Item Discounts</span>
                             <span id="itemDiscountDisplay">- $ 0.00</span>
+                        </div>
+
+                        <!-- Subtotal -->
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Subtotal</span>
+                            <span id="subtotalDisplay">$ 0.00</span>
                         </div>
 
                         <!-- Invoice discount -->
