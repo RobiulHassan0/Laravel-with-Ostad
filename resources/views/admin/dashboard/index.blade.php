@@ -4,6 +4,7 @@
 
 @section('content')
 
+{{-- Summary Cards --}}
 <div class="row g-4 mb-4">
     <div class="col-sm-6 col-xl-3">
         <div class="card h-100">
@@ -13,7 +14,7 @@
                 </div>
                 <div>
                     <p class="text-muted small mb-0">Categories</p>
-                    <h4 class="mb-0">3</h4>
+                    <h4 class="mb-0" id="totalCategories">—</h4>
                 </div>
             </div>
         </div>
@@ -26,7 +27,7 @@
                 </div>
                 <div>
                     <p class="text-muted small mb-0">Products</p>
-                    <h4 class="mb-0">8</h4>
+                    <h4 class="mb-0" id="totalProducts">—</h4>
                 </div>
             </div>
         </div>
@@ -35,11 +36,11 @@
         <div class="card h-100">
             <div class="card-body d-flex align-items-center gap-3">
                 <div class="rounded-3 bg-info bg-opacity-10 p-3">
-                    <i class="bi bi-archive text-info fs-3"></i>
+                    <i class="bi bi-receipt text-info fs-3"></i>
                 </div>
                 <div>
-                    <p class="text-muted small mb-0">Stock Items</p>
-                    <h4 class="mb-0">320</h4>
+                    <p class="text-muted small mb-0">Invoices</p>
+                    <h4 class="mb-0" id="totalInvoices">—</h4>
                 </div>
             </div>
         </div>
@@ -48,16 +49,17 @@
         <div class="card h-100">
             <div class="card-body d-flex align-items-center gap-3">
                 <div class="rounded-3 bg-warning bg-opacity-10 p-3">
-                    <i class="bi bi-receipt text-warning fs-3"></i>
+                    <i class="bi bi-currency-dollar text-warning fs-3"></i>
                 </div>
                 <div>
-                    <p class="text-muted small mb-0">Invoices</p>
-                    <h4 class="mb-0">42</h4>
+                    <p class="text-muted small mb-0">Total Revenue</p>
+                    <h4 class="mb-0" id="totalRevenue">—</h4>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <div class="row g-4">
     <div class="col-lg-8">
@@ -88,4 +90,30 @@
     </div>
 </div>
 
+
+@push('scripts')
+<script>
+    // Dashboard specific scripts can be added here
+
+    loadDashboardData();
+    async function loadDashboardData(){
+        let url = '{{ url("./api/v1/dashboard/summery") }}';
+        let token = localStorage.getItem('token');
+
+        // let tbody = document.getElementById('stockAlertsTableBody');
+
+        try{
+            let response = await axios.get(url, {headers: {Authorization: 'Bearer ' + token}});
+            let data = response.data['summery'] || {};
+
+            document.getElementById('totalCategories').textContent = data.total_categories || '0'; 
+            document.getElementById('totalProducts').textContent = data['total_products'] || '0';
+            document.getElementById('totalInvoices').textContent = data.total_invoices || '0';
+            document.getElementById('totalRevenue').textContent = '$' + parseFloat(data.total_revenue || 0).toFixed(2);
+        }catch(error){
+            tbody.innerHTML = `<tr><td colspan="6" class="text-center text-muted">Failed to load dashboard data.</td></tr>`;
+            showErrorToast(getErrorMessage(error, 'Failed to load dashboard data. Please try again.'));
+        }
+    }
+</script>
 @endsection
