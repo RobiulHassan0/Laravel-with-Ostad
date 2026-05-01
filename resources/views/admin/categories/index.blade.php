@@ -13,7 +13,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover align-middle">
+                <table id="categoiresTable" class="table table-hover align-middle">
                     <thead class="table-light">
                         <tr>
                             <th style="width: 70px;">#</th>
@@ -72,6 +72,8 @@
                             </tr>
                         `);
                     });
+                    let table = new DataTable('#categoiresTable');
+                    
                 } catch (err) {
                     tbody.innerHTML = `<tr> <td colspan="6" class="text-center text-muted py-4">Failed to load categories. </td> </tr>`;
                     showErrorToast(getErrorMessage(err, 'Failed to load categories'));

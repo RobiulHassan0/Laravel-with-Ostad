@@ -45,7 +45,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover align-middle">
+                <table id="stockTable" class="table table-hover align-middle">
                     <thead class="table-light">
                         <tr>
                             <th style="width: 70px;">#</th>
@@ -110,6 +110,8 @@
                                 <td class="text-muted">${created}</td>
                             </tr>
                         `;
+
+                        let table = new DataTable('#stockTable');
                     });
                 }catch(err){
                     tbody.innerHTML = '<tr><td colspan"8" class="text-center text-muted py-4">Failed to load stock movements.</td></tr>';

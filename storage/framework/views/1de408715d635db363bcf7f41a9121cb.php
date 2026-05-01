@@ -125,7 +125,7 @@
                                     </button>
                                 </div>
                                 <div class="col-6">
-                                    <button type="button" class="btn btn-outline-secondary w-100" id="clearCartBtn">
+                                    <button type="button" class="btn btn-outline-secondary w-100" id="clearCartBtn" disabled>
                                         <i class="bi bi-x-lg me-1"></i>Clear
                                     </button>
                                 </div>
@@ -418,6 +418,7 @@
             document.getElementById('totalSelection').style.display = cart.length > 0 ? 'block' : 'none';
             document.getElementById('finalizeBtn').disabled = cart.length === 0;
             document.getElementById('saveDraftBtn').disabled = cart.length === 0; 
+            document.getElementById('clearCartBtn').disabled = cart.length === 0; 
         }
 
         // --- Render Cart UI ----

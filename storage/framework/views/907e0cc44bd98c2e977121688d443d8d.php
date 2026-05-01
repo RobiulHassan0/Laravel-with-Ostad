@@ -140,10 +140,10 @@
                             <td>${statusBadge}</td>
                             <td class="text-end">${actionsHtml}</td>
                         </tr>`;
-                        tbody.innerHTML += rowContent;
-                        
-                        // let table = new DataTable('#InvoiceTable')
+                        tbody.innerHTML += rowContent;                        
                     });
+                    let table = new DataTable('#invoiceTable')
+
                 }catch(err){
                     tbody.innerHTML = `<tr><td colspan="9" class="text-muted py-4">Failed to load invoices.</td></tr>`;
                     showErrorToast(getErrorMessage(err, 'Failed to load invoices.'));

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function summery(){
+    public function summary(){
         try {
             $totalCategory = Category::count();
             $totalProducts = Product::count();
@@ -22,19 +22,19 @@ class DashboardController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Dashboard summery fetched successfully.',
-                'summery' => [
+                'message' => 'Dashboard summary fetched successfully.',
+                'summary' => [
                     'total_categories' => $totalCategory,
                     'total_products' => $totalProducts,
-                    'total_invoice' => $totalInvoices,
+                    'total_invoices' => $totalInvoices,
                     'total_revenue' => $totalRevenue,
-                    'low_stock_threshold' => $lowStockAlerts,
+                    'low_stock_alerts' => $lowStockAlerts,
                 ],
             ], 200);
         } catch (\Throwable $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Something went wrong while fetching dashboard summery.',
+                'message' => 'Something went wrong while fetching dashboard summary.',
             ], 500);
         }
     }

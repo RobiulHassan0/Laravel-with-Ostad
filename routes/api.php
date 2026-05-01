@@ -22,7 +22,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
 
         // Dashboard 
-        Route::get('/dashboard/summery', [DashboardController::class, 'summery']);
+        Route::get('/dashboard/summary', [DashboardController::class, 'summary']);
 
         // Cateogries
         Route::get('/categories', [CategoryController::class, 'index']);
