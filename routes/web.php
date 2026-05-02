@@ -10,12 +10,3 @@ Route::get('/', function () {
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('token.auth')->name('logout');
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('token.auth')->name('dashboard');
-Route::get('/categories', [DashboardController::class, 'category'])->middleware('token.auth')->name('categories');
-Route::get('/products', [DashboardController::class, 'product'])->middleware('token.auth')->name('products');
-Route::get('/stocks', [DashboardController::class, 'stock'])->middleware('token.auth')->name('stocks');
-Route::get('/pos', [DashboardController::class, 'pos'])->middleware('token.auth')->name('pos');
-Route::get('/invoices', [DashboardController::class, 'invoice'])->middleware('token.auth')->name('invoices');
-
