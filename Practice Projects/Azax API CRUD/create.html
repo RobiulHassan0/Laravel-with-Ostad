@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Create Product</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-100">
+    <div class="max-w-xl mx-auto py-10">
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-6 text-slate-700">
+                Add New Product
+            </h2>
+
+            <div class="flex flex-col space-y-4">
+
+                <div >
+                    <label class="font-semibold" for="">Product Name</label>
+                    <input type="text" placeholder="Product Name" class="w-full border p-2 rounded"
+                        id="productNameID" />
+                </div>
+
+                <div>
+                    <label class="font-semibold" for="">Product Code</label>
+                    <input type="text" placeholder="Product Code" class="w-full border p-2 rounded"
+                        id="productCodeID" />
+                </div>
+
+                <div>
+                    <label class="font-semibold" for="">Unit Price</label>
+                    <input type="number" placeholder="Unit Price" class="w-full border p-2 rounded"
+                        id="unitPriceID" />
+                </div>
+
+                <div>
+                    <label class="font-semibold" for="">Quantity</label>
+                    <input type="number" placeholder="Quantity" class="w-full border p-2 rounded"
+                        id="qtyID" />
+                </div>
+
+                <div>
+                    <label class="font-semibold" for="">Total Price</label>
+                    <input type="number" placeholder="Total Price" class="w-full border p-2 rounded"
+                        id="totalPriceID" />
+                </div>
+
+                <button onclick="addNewProduct()"
+                    class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700">
+                    Save Product
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        async function addNewProduct() {
+            let productNameValue = document.getElementById('productNameID').value;
+            let productCodeValue = document.getElementById('productCodeID').value;
+            let unitPriceValue = document.getElementById('unitPriceID').value;
+            let quantityValue = document.getElementById('qtyID').value;
+            let totalPriceValue = document.getElementById('totalPriceID').value;
+
+            let obj = {
+                "ProductName": productNameValue,
+                "ProductCode": productCodeValue,
+                "UnitPrice": unitPriceValue,
+                "Qty": quantityValue,
+                "TotalPrice": totalPriceValue,
+            }
+
+            let url = 'https://crud.teamrabbil.com/api/v1/CreateProduct';
+            let response = await axios.post(url, obj);
+            window.location = "index.html"
+        }
+    </script>
+</body>
+
+</html>

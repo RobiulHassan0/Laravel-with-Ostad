@@ -1,0 +1,454 @@
+/* Custom CSS Variables */
+:root {
+  --primary-color: #6c63ff;
+  --accent-color: #22c55e;
+  --text-dark: #111827;
+  --text-light: #e5e7eb;
+  --bg-light: #f8fafc;
+  --bg-dark: #0b1220;
+  --animation-duration: 0.3s;
+}
+
+/* Typography */
+body {
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+.display-4,
+.display-5 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+/* Dark Mode Styles */
+[data-bs-theme="dark"] {
+  --bs-body-bg: var(--bg-dark);
+  --bs-body-color: var(--text-light);
+}
+
+[data-bs-theme="dark"] .bg-light {
+  background-color: #1f2937 !important;
+}
+
+[data-bs-theme="dark"] .navbar-light {
+  background-color: #1f2937 !important;
+}
+
+[data-bs-theme="dark"] .text-muted {
+  color: #9ca3af !important;
+}
+
+/* Glass Effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-bs-theme="dark"] .glass-card {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--bg-light) 0%, rgba(108, 99, 255, 0.05) 100%);
+}
+
+[data-bs-theme="dark"] .hero-section {
+  background: linear-gradient(135deg, var(--bg-dark) 0%, rgba(108, 99, 255, 0.1) 100%);
+}
+
+.hero-image img {
+  transition: transform var(--animation-duration) ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.05);
+}
+
+/* Feature Icons */
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.service-icon {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+/* Cards */
+.card {
+  transition: all var(--animation-duration) ease;
+  border-radius: 1rem;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="dark"] .card:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Project Cards */
+.project-card {
+  overflow: hidden;
+  transition: all var(--animation-duration) ease;
+}
+
+.project-card .card-img-top {
+  transition: transform var(--animation-duration) ease;
+  height: 200px;
+  object-fit: cover;
+}
+
+.project-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+/* Service Cards */
+.service-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Blog Cards */
+.blog-card .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.blog-card .card-title a {
+  color: inherit;
+  transition: color var(--animation-duration) ease;
+}
+
+.blog-card .card-title a:hover {
+  color: var(--primary-color);
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--primary-color);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 2rem;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -2rem;
+  top: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  background: var(--primary-color);
+  border-radius: 50%;
+  border: 3px solid white;
+}
+
+[data-bs-theme="dark"] .timeline-marker {
+  border-color: var(--bg-dark);
+}
+
+.timeline-content {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme="dark"] .timeline-content {
+  background: #1f2937;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Progress Bars */
+.progress {
+  height: 8px;
+  border-radius: 4px;
+}
+
+.progress-bar {
+  border-radius: 4px;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all var(--animation-duration) ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #5a52e5;
+  border-color: #5a52e5;
+}
+
+/* Navbar */
+.navbar {
+  transition: all var(--animation-duration) ease;
+  backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+/* Carousel Controls */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  padding: 1rem;
+}
+
+/* Social Links */
+.social-links .btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contact Form */
+.contact-form .form-control {
+  border-radius: 0.5rem;
+  border: 2px solid #e5e7eb;
+  transition: all var(--animation-duration) ease;
+}
+
+.contact-form .form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(108, 99, 255, 0.25);
+}
+
+/* Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.fade-in.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .fade-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-section {
+    text-align: center;
+  }
+
+  .display-4 {
+    font-size: 2rem;
+  }
+
+  .timeline {
+    padding-left: 1rem;
+  }
+
+  .timeline::before {
+    left: 0.5rem;
+  }
+
+  .timeline-item {
+    padding-left: 1.5rem;
+  }
+
+  .timeline-marker {
+    left: -1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 0.9rem;
+  }
+
+  .btn-lg {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .feature-icon,
+  .service-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a52e5;
+}
+
+[data-bs-theme="dark"] ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+/* Focus States for Accessibility */
+.btn:focus,
+.form-control:focus,
+.nav-link:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Skip to content link for screen readers */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--primary-color);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Footer Styles - Ensure readable text on dark background */
+footer.bg-dark {
+  background-color: #000 !important;
+}
+
+footer.bg-dark .text-muted {
+  color: #adb5bd !important;
+}
+
+footer.bg-dark p,
+footer.bg-dark h5,
+footer.bg-dark h6,
+footer.bg-dark li,
+footer.bg-dark small {
+  color: #e9ecef !important;
+}
+
+footer.bg-dark a.text-muted {
+  color: #adb5bd !important;
+  transition: color 0.3s ease;
+}
+
+footer.bg-dark a.text-muted:hover {
+  color: #fff !important;
+}
+
+/* Dark mode footer styles */
+[data-bs-theme="dark"] footer.bg-dark .text-muted {
+  color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] footer.bg-dark p,
+[data-bs-theme="dark"] footer.bg-dark h5,
+[data-bs-theme="dark"] footer.bg-dark h6,
+[data-bs-theme="dark"] footer.bg-dark li,
+[data-bs-theme="dark"] footer.bg-dark small {
+  color: #e9ecef !important;
+}
+
+[data-bs-theme="dark"] footer.bg-dark a.text-muted {
+  color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] footer.bg-dark a.text-muted:hover {
+  color: #fff !important;
+}
