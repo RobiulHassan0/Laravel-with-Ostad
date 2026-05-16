@@ -1,0 +1,55 @@
+<script setup>
+import { ref, watch, } from 'vue';
+import axios from 'axios';
+
+
+  const search = ref('');
+  const words = ref([]); 
+  const loading = ref(false);
+
+  watch(search, async (newValue) => {
+    if(newValue.length < 2) {
+      words.value = [];
+      return;
+    }
+
+    loading.value = true;
+     
+    try {
+      const url = 'https://openapi.programming-hero.com/api/words/all' ;
+      const response = await axios.get(url)
+      const allwords = response.data.data; 
+      
+      words.value = allwords.filter( (item) =>
+        item.word.toLowerCase().includes(newValue.toLowerCase())
+      );
+
+    } catch (error) {
+
+      console.log(error);
+      words.value = [];
+
+    }finally{
+      loading.value = false;
+    }
+  });
+
+</script>
+
+<template>
+  <div>
+    <h1>Search Country</h1>
+    <input type="text" 
+      v-model="search" 
+      placeholder="Search word"
+    >
+    <div v-if="loading">Loading</div>
+    <ul v-else>
+      <li v-for="(word, index) in words" :key="index"><span style="font-weight: bolder; color: red;">word:</span> {{ word.word}} 
+        <span style="font-weight: bolder; color: blue; background: salmon;">Meaning:</span> {{ word.meaning || "No Meaning" }}
+      </li>
+    </ul>
+  </div>
+</template>
+
+<style scoped></style>
