@@ -12,6 +12,7 @@ const route = useRoute();
         <router-link to="/blogs/2">Article 2</router-link>
         <router-link to="/blogs/3">Article 3</router-link>
         <router-link :to="{name: blogs, params: {id:4}}">Article 4</router-link>
+        <router-link :to="{name: blogs, params: {id:4}, query:{category:'tech', page:'3'}}">Article 5</router-link>
     </div>
 </template>
 
