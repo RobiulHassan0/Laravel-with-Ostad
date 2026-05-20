@@ -11,11 +11,12 @@
       <!-- <router-link :to="{path: '/about'}">About</router-link> -->
       <!-- <router-link to="/about">About</router-link> -->
 
-      <router-link :to="{ name: 'about' }">About</router-link>
+      <router-link to="/about">About</router-link>
       
-      <router-link :to="{ name: 'contact' }">Contact</router-link>
+      <router-link to="/contact">Contact</router-link>
 
-      <router-link :to="{ name: 'services' }">Services</router-link>
+      <router-link to="/services">Services</router-link>
+      <router-link to="/dashboard">Dashboard</router-link>
     </nav>
     <h1>My App</h1>
 
