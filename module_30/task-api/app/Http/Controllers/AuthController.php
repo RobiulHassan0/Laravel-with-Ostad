@@ -65,19 +65,19 @@ class AuthController extends Controller
                 'message' => 'Login successful.',
                 'user' => $user,
                 'token' => $token
-            ]);
+            ], 200);
         } catch (ValidationException $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Validation Error',
                 'errors' => $e->errors(),
-            ]);
+            ], 422);
         } catch (\Throwable $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Validation Error',
                 'errors' => $e->getMessage(),
-            ]);
+            ], 500);
         }
     }
 
@@ -99,13 +99,13 @@ class AuthController extends Controller
                 'success' => true,
                 'message' => 'User logged out successfully.'
             ], 200);
-            
+
         } catch (\Throwable $e) {
            return response()->json([
             'success' => false,
             'message' => 'Something went wrong during logout',
             'errors' => $e->getMessage()
-           ]);
+           ], 500);
         }
     }
 }
