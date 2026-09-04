@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class EmailOtp extends Model
+{
+    protected $fillable = [
+        'user_id',
+        'otp',
+        'expires_at'
+    ];
+
+    protected $casts = [
+        'expires_at' => 'datetime'
+    ];
+
+    // Check if the OTP has expired
+    public function isExpired(){
+        return now()->greaterThan($this->expires_at);
+    }
+}
