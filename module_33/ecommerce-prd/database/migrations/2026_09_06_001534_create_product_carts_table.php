@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('product_carts', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();;
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();;
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             
             $table->foreignId('product_variant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->unsignedInteger('quantity')->default(1);
 
-            $table->unique(['user_id', 'product_id', 'product_varian_id']);
+            $table->unique(['user_id', 'product_id', 'product_variant_id']);
 
             $table->timestamps();
         });

@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
 
-            $table->string('sku', 60)->nullable();
+            $table->string('sku', 60)->nullable()->unique();
 
             $table->string('color', 50)->nullable();
             $table->string('size', 30)->nullable();

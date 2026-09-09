@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete(); 
 
-            $table->foreignId('product_veriant_id')->nullable()->constrained('product_variants')->nullOnDelete();
+            $table->foreignId('product_variant_id')->nullable()->constrained('product_variants')->nullOnDelete();
 
             // SNAPSHOT
             $table->string('variant_color', 50)->nullable();
@@ -27,8 +27,8 @@ return new class extends Migration
             $table->decimal('unit_price', 10, 2);
             $table->unsignedInteger('quantity');
             
-            $table->decimal('subtotal', 10, 2);
-            
+            $table->decimal('line_total', 10, 2);
+
             $table->timestamps();
         });
     }

@@ -39,7 +39,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
 
             $table->foreignId('category_id')->constrained()->restrictOnDelete()->cascadeOnUpdate();
-            $table->foreignId('brand_id')->constrained()->nullOnDelete()->cascadeOnUpdate();
+            $table->foreignId('brand_id')->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
 
             $table->timestamps();
         });

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->unsignedInteger('sort_order')->default(0);
 
-            $table->unique('parent_id', 'name');
+            $table->unique(['parent_id', 'name']);
 
             $table->timestamps();
         });

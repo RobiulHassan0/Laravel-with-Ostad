@@ -19,11 +19,12 @@ return new class extends Migration
 
             $table->unsignedTinyInteger('rating');
 
-            $table->string('description')->nullable();
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
 
             $table->boolean('is_approved')->default(false);
 
-            $table->unique('user_id', 'product_id');
+            $table->unique(['user_id', 'product_id']);
 
             $table->timestamps();
         });

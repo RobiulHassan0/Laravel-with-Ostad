@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('recipient_name', 100);
             $table->string('recipient_phone', 20);
             $table->string('address_line1', 255);
-            $table->string('address_line2', 255);
+            $table->string('address_line2', 255)->nullable();
             $table->string('city', 100);
             $table->string('state', 100)->nullable();
             $table->string('postcode', 20)->nullable();
@@ -32,7 +32,7 @@ return new class extends Migration
 
             $table->decimal('total_amount', 10, 2);
 
-            $table->enum('status', ['pending', 'processing', 'shipped', 'deliverd', 'cancelled'])->default('pending');
+            $table->enum('status', ['pending', 'processing', 'shipped', 'delivered', 'cancelled'])->default('pending');
 
             $table->enum('payment_status', ['unpaid', 'paid', 'refunded'])->default('unpaid');
 
@@ -40,8 +40,8 @@ return new class extends Migration
 
             $table->string('transaction_id', 100)->nullable();
             
-            $table->timestamps();
-        });
+            $table->timestamps(); 
+        }); 
     }
 
     /**
